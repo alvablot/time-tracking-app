@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import axios from "axios";
+
 import "./App.css";
 
 import Overview from "./pages/Overview";
@@ -40,16 +40,8 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-    async function getData(e) {
-        //e.preventDefault();
-        try {
-            const response = await axios.get("http://localhost:3000/projects/");
-            console.log(response.data);
-        } catch (error) {}
-    }
     return (
         <div className="App">
-            <button onClick={getData}>Tryck</button>
             <RouterProvider router={router} />
         </div>
     );

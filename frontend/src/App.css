@@ -1,12 +1,16 @@
 #root {
-    max-width: 1280px;
+    max-width: 500px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 2px;
     text-align: center;
 }
 
 nav {
+    background-color: #242424;
     border-bottom: 1px solid rgb(255, 255, 255);
+    position: fixed;
+    bottom: 0px;
+
 }
 
 .crumbs ol {
@@ -25,4 +29,16 @@ nav {
     font-size: 80%;
     font-weight: bold;
     padding: 0 20px;
+}
+.project-container {
+    background-color: antiquewhite;
+    color: rgb(43, 21, 21);
+    padding: 10px;
+    margin: 3px;
+}
+.task {
+    background-color: rgb(255, 214, 160);
+}
+.time {
+    background-color: rgb(163, 189, 205);
 }

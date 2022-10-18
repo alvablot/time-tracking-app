@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 function Timer() {
     return (
         <div>
-            Timer
+            <h1>Timer</h1>
             <Navbar />
         </div>
     );
