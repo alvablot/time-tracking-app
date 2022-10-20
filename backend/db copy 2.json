@@ -1,0 +1,51 @@
+{
+    "projects": [
+        {
+            "id": "1",
+            "name": "Projekt nr 1",
+            "color": "#4E0E9F"
+        },
+        {
+            "id": "2",
+            "name": "Projekt nr 2",
+            "color": "#330055"
+        }
+    ],
+    "tasks": [
+        {
+            "id": "1",
+            "projectId": "1",
+            "title": "Läsa genom Reacts nya dokumentation"
+        },
+        {
+            "id": "2",
+            "projectId": "1",
+            "title": "Repa"
+        },
+        {
+            "id": "3",
+            "projectId": "1",
+            "title": "Äta"
+        }
+    ],
+    "timelogs": [
+        {
+            "id": "1",
+            "taskId": "1",
+            "start": "2022-10-12T10:49:33.081Z",
+            "end": "2022-10-12T10:49:33.081Z"
+        },
+        {
+            "id": "2",
+            "taskId": "2",
+            "start": "2022-10-12T10:49:33.081Z",
+            "end": "2022-10-12T10:49:33.081Z"
+        },
+        {
+            "id": "3",
+            "taskId": "3",
+            "start": "2022-10-12T10:49:33.081Z",
+            "end": "2022-10-12T10:49:33.081Z"
+        }
+    ]
+}

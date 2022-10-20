@@ -1,5 +1,7 @@
 #root {
     max-width: 500px;
+    min-width: 320px;
+    width: 100%;
     margin: 0 auto;
     padding: 2px;
     text-align: center;
@@ -7,10 +9,10 @@
 
 nav {
     background-color: #242424;
-    border-bottom: 1px solid rgb(255, 255, 255);
+    width: 100%;
     position: fixed;
     bottom: 0px;
-
+    left: 0px;
 }
 
 .crumbs ol {
@@ -21,7 +23,10 @@ nav {
 .crumb {
     display: inline-block;
 }
-
+.App {
+    width: 100%;
+    margin: 0px;
+}
 .crumb a::after {
     display: inline-block;
     color: rgb(255, 255, 255);
@@ -34,11 +39,60 @@ nav {
     background-color: antiquewhite;
     color: rgb(43, 21, 21);
     padding: 10px;
-    margin: 3px;
+    margin: 2px;
+}
+.select-container {
+    cursor: grab;
+    color: black;
+    text-align: left;
+    padding: 5px;
+}
+.task-container {
+    margin: 0 auto;
+    height: 150px;
+    overflow-y: auto;
+    width: 60%;
 }
 .task {
     background-color: rgb(255, 214, 160);
 }
 .time {
     background-color: rgb(163, 189, 205);
+}
+.color-cube {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border: 1px solid black;
+    padding: 5px;
+    cursor: grab;
+    margin: 4px 4px 0px 4px;
+}
+.blue {
+    background-color: #5650ff;
+}
+.purple {
+    background-color: #af3bee;
+}
+.yellow {
+    background-color: #e3da3b;
+}
+.green {
+    background-color: #34dc3a;
+}
+.red {
+    background-color: #fb3a64;
+}
+.pink {
+    background-color: #fc83cc;
+}
+.orange {
+    background-color: #ffb651;
+}
+
+.hidden {
+    display: none;
+}
+.visible {
+    display: inline;
 }
