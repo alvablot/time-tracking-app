@@ -59,6 +59,9 @@ nav {
 .time {
     background-color: rgb(163, 189, 205);
 }
+.active-crumb {
+    background:rgb(152, 2, 132)
+}
 .color-cube {
     display: inline-block;
     width: 10px;
