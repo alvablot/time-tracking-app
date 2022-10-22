@@ -1,9 +1,15 @@
 import { createContext, useContext } from "react";
 import axios from "axios";
+import { useState } from "react";
 
 const ProjectContext = createContext();
 const host = "http://localhost:3000/";
 export function ProjectProvider(props) {
+
+    const [projects, setProjects] = useState([])
+    const [tasks, setTasks] = useState([])
+    const [timelogs, setTimelogs] = useState([])
+
     async function getProjects() {
         try {
             const response = await axios.get(`${host}projects/`);
@@ -29,6 +35,13 @@ export function ProjectProvider(props) {
     }
 
     const providerValue = {
+        projects,
+        setProjects,
+        tasks,
+        setTasks,
+        timelogs,
+        setTimelogs,
+        setProjects,
         getProjects,
         getTasks,
         getTimelogs,

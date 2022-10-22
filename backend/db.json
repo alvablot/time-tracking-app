@@ -1,37 +1,16 @@
 {
   "projects": [
     {
-      "id": 357937293878066,
-      "name": "rrtj",
-      "color": "#7d34dc"
+      "name": "asdasd",
+      "color": "#34dc3a",
+      "id": 1
     },
     {
-      "id": 305782687357837,
-      "name": "afsfes",
-      "color": "#34dc3a"
-    },
-    {
-      "id": 432923499611773,
-      "name": "wfwef",
-      "color": "#fb3a64"
+      "name": "asdasd",
+      "color": "#fb3a64",
+      "id": 2
     }
   ],
-  "tasks": [
-    {
-      "id": 778328456956552,
-      "projectId": 305782687357837,
-      "title": "fghdfh"
-    },
-    {
-      "id": 94597346677080,
-      "projectId": 357937293878066,
-      "title": "Task title"
-    },
-    {
-      "id": 205159056311493,
-      "projectId": 432923499611773,
-      "title": "Task title"
-    }
-  ],
+  "tasks": [],
   "timelogs": []
 }

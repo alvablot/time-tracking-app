@@ -5,11 +5,9 @@ const host = "http://localhost:3000/";
 
 function AddTask2(props) {
     const { trigger} = props
-    const { projects } = useProjectContext();
-    const { tasks } = useProjectContext();
-    const { timelogs } = useProjectContext();
+  const providerValue = useProjectContext();
   const [taskName, setTaskName] = useState("Task title");
-  //const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState([]);
   const [projectId, setProjectId] = useState(0);
   const [color, setColor] = useState("");
   const [showHideTaskInput, setShowHideTaskInput] = useState(props.hidden);
@@ -30,7 +28,7 @@ function AddTask2(props) {
     }
   }
 
-  /*async function getData(type) {
+  async function getData(type) {
     if (type === "projects") {
       const data = await providerValue.getProjects();
       setProjects(data);
@@ -43,7 +41,7 @@ function AddTask2(props) {
       const data = await providerValue.getTimelogs();
       setTimelogs(data);
     }
-  }*/
+  }
 
   async function viewInput(element) {
     await getData("projects");
