@@ -1,16 +1,27 @@
 {
   "projects": [
     {
-      "name": "asdasd",
-      "color": "#34dc3a",
+      "name": "Skolan",
+      "color": "#e3da3b",
       "id": 1
-    },
-    {
-      "name": "asdasd",
-      "color": "#fb3a64",
-      "id": 2
     }
   ],
-  "tasks": [],
-  "timelogs": []
+  "tasks": [
+    {
+      "projectId": 1,
+      "title": "Skoluppgift",
+      "start": null,
+      "end": null,
+      "active": false,
+      "id": 1
+    }
+  ],
+  "timelogs": [
+    {
+      "taskId": 1,
+      "start": 23,
+      "end": 23,
+      "id": 49
+    }
+  ]
 }
