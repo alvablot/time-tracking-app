@@ -1,19 +1,40 @@
 import React from "react";
+import { Outlet, NavLink, Link, useLoaderData, Form, redirect } from "react-router-dom";
 
 function Navbar() {
     return (
         <div>
             <nav className="crumbs">
                 <ol>
-                    <li className="crumb"><a></a></li>
                     <li className="crumb">
-                        <a href="/oveview">Overview</a>
+                    <NavLink
+                            to={`/overview`}
+                            className={({ isActive, isPending }) =>
+                                isActive ? "active" : isPending ? "pending" : ""
+                            }
+                        >
+                            overview
+                        </NavLink>
                     </li>
                     <li className="crumb">
-                        <a href="/timer">Timer</a>
+                    <NavLink
+                            to={`/timer`}
+                            className={({ isActive, isPending }) =>
+                                isActive ? "active" : isPending ? "pending" : ""
+                            }
+                        >
+                            timer
+                        </NavLink>
                     </li>
                     <li className="crumb">
-                        <a href="/calender">Calender</a>
+                        <NavLink
+                            to={`/calender`}
+                            className={({ isActive, isPending }) =>
+                                isActive ? "active" : isPending ? "pending" : ""
+                            }
+                        >
+                            calender
+                        </NavLink>
                     </li>
                 </ol>
             </nav>

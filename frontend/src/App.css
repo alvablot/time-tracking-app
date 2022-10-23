@@ -14,7 +14,15 @@ nav {
     bottom: 0px;
     left: 0px;
 }
-
+.active {
+    background-color: #ffb651;
+    padding: 5px;
+    border-radius: 5px;;
+}
+.active a {
+    background-color: red;
+    color: #fff;
+}
 .crumbs ol {
     list-style-type: none;
     padding-left: 0;
@@ -22,6 +30,7 @@ nav {
 
 .crumb {
     display: inline-block;
+    margin: 10px;
 }
 .App {
     width: 100%;
@@ -30,7 +39,6 @@ nav {
 .crumb a::after {
     display: inline-block;
     color: rgb(255, 255, 255);
-    content: " | ";
     font-size: 80%;
     font-weight: bold;
     padding: 0 20px;

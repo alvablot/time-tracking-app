@@ -30,11 +30,7 @@ const router = createBrowserRouter([
             {
                 path: "calender",
                 element: <Calender />,
-            },
-            {
-                path: "*",
-                element: <Overview />,
-            },
+            }
         ],
     },
 ]);

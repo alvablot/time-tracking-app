@@ -1,27 +1,25 @@
 {
   "projects": [
     {
-      "name": "Skolan",
+      "name": "xcvdvx",
       "color": "#e3da3b",
       "id": 1
+    },
+    {
+      "name": "sd",
+      "color": "#34dc3a",
+      "id": 2
     }
   ],
   "tasks": [
     {
       "projectId": 1,
-      "title": "Skoluppgift",
-      "start": null,
-      "end": null,
-      "active": false,
+      "title": "xcvxdv",
+      "start": 1666530922131,
+      "end": 1666540072250,
+      "active": true,
       "id": 1
     }
   ],
-  "timelogs": [
-    {
-      "taskId": 1,
-      "start": 23,
-      "end": 23,
-      "id": 49
-    }
-  ]
+  "timelogs": []
 }

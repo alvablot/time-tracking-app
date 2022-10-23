@@ -1,6 +1,7 @@
 import { React, useState, useEffect, Children } from "react";
 import { useProjectContext } from "../context/ProjectContext";
 import Navbar from "../components/Navbar";
+import AddTimer from "../components/AddTimer";
 import axios from "axios";
 const host = "http://localhost:3000/";
 
@@ -10,13 +11,14 @@ function Timer() {
     const [dateTime, setDateTime] = useState(0);
 
     function getTime(data) {
-        const now = new Date();
+        let now = new Date();
+        now.toString();
         const date = now.getDate();
         const hours = now.getHours();
         const minutes = now.getMinutes();
         const seconds = now.getSeconds();
-        //const time = `${hours}:${minutes}:${seconds}`
-        const time = now.getTime();
+        const time = `${hours}:${minutes}:${seconds}`
+        //const time = now.getTime();
         if (data === "time") return time;
         if (data === "seconds") return seconds;
         if (data === "date") return date;
@@ -53,35 +55,36 @@ function Timer() {
             console.log(error);
         }
     }
+
     async function patchTimer(id, active) {
         await getData("tasks");
-        //isActive ? (active = false) : (active = true);
-        console.log(active);
+        const taskToUpdate = tasks.find((task) => task.id === id);
+
         try {
-            const response = await axios.patch(`${host}tasks/${id}`, {
-                start: getTime("seconds"),
-                end: getTime("seconds"),
-                active: active,
-            });
-            const { data } = response;
-            //console.log(response.data);
-            setTimelogs([...timelogs, data]);
+            if (taskToUpdate.start !== null) {
+                const response = await axios.patch(`${host}tasks/${id}`, {
+                    end: getTime("time"),
+                    active: active,
+                });
+                const { data } = response;
+                setTimelogs([...timelogs, data]);
+            } else {
+                const response = await axios.patch(`${host}tasks/${id}`, {
+                    start: getTime("time"),
+                    end: getTime("time"),
+                    active: active,
+                });
+                const { data } = response;
+                setTimelogs([...timelogs, data]);
+            }
         } catch (error) {
             console.log(error);
         }
-    }
-    function startTimer(id, active) {
-        postTimelog(id);
-        patchTimer(id, active);
-        let started;
-        if (started === true) return;
-        else {
-            const timer = setInterval(() => {
-                setDateTime(getTime("seconds"));
-                started = true;
-            }, 100);
+        if (taskToUpdate.start === null) {
         }
     }
+
+
     useEffect(() => {
         getData("tasks");
         getData("projects");
@@ -90,45 +93,13 @@ function Timer() {
     return (
         <div>
             <h1>Timer</h1>
-            {dateTime}
-            <div>
-                {tasks.map((task, i) => {
-                    let active;
-                    let color;
-                    let hej;
-                    let buttonText;
-                    task.active ? (buttonText = "Stop") : (buttonText = "Start");
-                    projects.map((project) => {
-                        project.id === task.projectId ? (color = project.color) : (hej = null);
-                    });
-                    return (
-                        <div
-                            key={`task_${task.id}`}
-                            className="project-container task"
-                            style={{ background: color }}
-                        >
-                            <div>Id: {task.id}</div>
-                            <div>ProjId: {task.projectId}</div>
-                            <div>Title: {task.title}</div>
-
-                            <button
-                                onClick={() => {
-                                    startTimer(task.id, true);
-                                }}
-                            >
-                                Start
-                            </button>
-                            <button
-                                onClick={() => {
-                                    startTimer(task.id, false);
-                                }}
-                            >
-                                Stop
-                            </button>
-                        </div>
-                    );
-                })}
-            </div>
+            <AddTimer
+                dateTime={dateTime}
+                setDateTime={setDateTime}
+                patchTimer={patchTimer}
+                getTime={getTime}
+                postTimelog={postTimelog}
+            />
             <Navbar />
         </div>
     );
