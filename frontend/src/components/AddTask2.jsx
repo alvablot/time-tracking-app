@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import DateObject from "react-date-object";
 import { useProjectContext } from "../context/ProjectContext";
 import axios from "axios";
 const host = "http://localhost:3000/";
@@ -16,13 +17,16 @@ function AddTask2(props) {
     const [createButton, setCreateButton] = useState("visible");
     let [errorMsg, setErrorMsg] = useState("");
     async function postTask(projectId) {
+        const date = new DateObject();
         if (taskName === "" || taskName === "Task name" || projectId < 1) return;
         try {
             const response = await axios.post(`${host}tasks`, {
+                date: date.format("YYYY-DD-MM"), 
                 projectId: projectId,
                 title: taskName,
-                start: null,
-                end: null,
+                start: 0,
+                end: 0,
+                timeElapsed: 0,
                 active: false,
             });
             const { data } = response;

@@ -14,14 +14,23 @@ function Timer() {
         let now = new Date();
         now.toString();
         const date = now.getDate();
+        const year = now.getHours();
+        const month = now.getHours();
+        const day = now.getDay();
         const hours = now.getHours();
         const minutes = now.getMinutes();
         const seconds = now.getSeconds();
-        const time = `${hours}:${minutes}:${seconds}`
-        //const time = now.getTime();
-        if (data === "time") return time;
-        if (data === "seconds") return seconds;
+        //const time = `${hours}:${minutes}:${seconds}`;
+        const time = now.getTime();
+        if (data === "year") return time;
+        if (data === "month") return month;
         if (data === "date") return date;
+        if (data === "day") return day;
+        if (data === "time") return time;
+        if (data === "hours") return hours;
+        if (data === "minutes") return minutes;
+        if (data === "seconds") return seconds;
+        
     }
 
     //const [buttonText, setButtonText] = useState("");
@@ -41,12 +50,13 @@ function Timer() {
             //console.log(data);
         }
     }
-    async function postTimelog(id) {
+    async function postTimelog(id, active, start, end) {
         try {
             const response = await axios.post(`${host}timelogs`, {
                 taskId: id,
-                start: getTime("date"),
-                end: getTime("date"),
+                start: start,
+                end: end,
+                active: active,
             });
             const { data } = response;
             //console.log(response.data);
@@ -56,34 +66,32 @@ function Timer() {
         }
     }
 
-    async function patchTimer(id, active) {
+    async function patchTimer(id, active, start, end) {
         await getData("tasks");
-        const taskToUpdate = tasks.find((task) => task.id === id);
+        const taskToUpdate = await tasks.find((task) => task.id === id);
 
         try {
-            if (taskToUpdate.start !== null) {
+            /*if (taskToUpdate.start !== null) {
                 const response = await axios.patch(`${host}tasks/${id}`, {
-                    end: getTime("time"),
                     active: active,
                 });
                 const { data } = response;
                 setTimelogs([...timelogs, data]);
-            } else {
-                const response = await axios.patch(`${host}tasks/${id}`, {
-                    start: getTime("time"),
-                    end: getTime("time"),
-                    active: active,
-                });
-                const { data } = response;
-                setTimelogs([...timelogs, data]);
-            }
+            } else {*/
+            const response = await axios.patch(`${host}tasks/${id}`, {
+                active: active,
+                start: start,
+                end: end,
+            });
+            const { data } = response;
+            setTimelogs([...timelogs, data]);
+            //}
         } catch (error) {
             console.log(error);
         }
         if (taskToUpdate.start === null) {
         }
     }
-
 
     useEffect(() => {
         getData("tasks");
