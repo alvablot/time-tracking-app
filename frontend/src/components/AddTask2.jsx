@@ -54,7 +54,7 @@ function AddTask2(props) {
         <div>
             <div className={showHideTaskInput}>
                 <br />
-                Choose project
+                Choose a project to bind to your task
                 <div className="task-container">
                     {projects.map((project) => {
                         return (

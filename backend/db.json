@@ -1,63 +1,68 @@
 {
   "projects": [
     {
-      "name": "xcvdvx",
-      "color": "#e3da3b",
+      "name": "Skolprojekt",
+      "color": "#af3bee",
       "id": 1
     },
     {
-      "name": "sef",
+      "name": "Hemma",
       "color": "#34dc3a",
       "id": 2
-    },
-    {
-      "name": "adD",
-      "color": "#af3bee",
-      "id": 3
     }
   ],
   "tasks": [
     {
-      "date": "2020-10-11",
-      "projectId": 2,
-      "title": "ddfgfd",
+      "date": "2022-26-10",
+      "projectId": 1,
+      "title": "Fixa inlm 1",
       "start": 0,
-      "end": 0,
-      "timeElapsed": 0,
-      "active": true,
+      "end": 2,
+      "timeElapsed": 2,
+      "active": false,
       "id": 1
     },
     {
-      "date": "2020-10-11",
-      "projectId": 1,
-      "title": "ddfgfd",
-      "start": 0,
-      "end": 0,
-      "timeElapsed": 0,
-      "active": true,
-      "id": 2
-    },
-    {
       "date": "2022-26-10",
       "projectId": 2,
-      "title": "sfaws",
+      "title": "Diska",
       "start": 0,
-      "end": 0,
-      "timeElapsed": 0,
+      "end": 1522,
+      "timeElapsed": 1522,
       "active": false,
-      "id": 3
-    },
-    {
-      "date": "2022-26-10",
-      "projectId": 3,
-      "title": "ASDASDAS",
-      "start": 0,
-      "end": 0,
-      "timeElapsed": 0,
-      "active": false,
-      "id": 4
+      "id": 2
     }
   ],
   "timelogs": [
+    {
+      "taskId": 1,
+      "timeElapsed": "00:00:27",
+      "date": "2022-26-10",
+      "id": 1
+    },
+    {
+      "taskId": 2,
+      "timeElapsed": "00:25:22",
+      "date": "2022-26-10",
+      "id": 2
+    },
+    {
+      "taskId": 1,
+      "timeElapsed": "00:00:27",
+      "date": "2022-26-10",
+      "id": 3
+    },
+    {
+      "taskId": 1,
+      "timeElapsed": "00:00:27",
+      "date": "2022-26-10",
+      "id": 4
+    },
+    {
+      "taskId": 1,
+      "timeElapsed": "00:00:02",
+      "date": "2022-26-10",
+      "id": 5
+    }
   ]
 }

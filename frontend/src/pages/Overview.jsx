@@ -94,15 +94,8 @@ function Overview() {
             >
                 Tasks
             </button>
-            <button
-                onClick={() => {
-                    getData("timelogs");
-                    view("timelogs");
-                }}
-            >
-                Timelogs
-            </button>
             <div className={showHideProjects}>
+                <h2>Projects</h2>
                 {projects.map((project) => {
                     return (
                         <div
@@ -110,6 +103,9 @@ function Overview() {
                             className="project-container"
                             style={{ background: project.color }}
                         >
+                            <div>
+                                <b>{project.name}</b>
+                            </div>
                             <button
                                 onClick={() => {
                                     deleteObject("projects", project.id);
@@ -117,16 +113,16 @@ function Overview() {
                             >
                                 x
                             </button>
-                            <div>Id: {project.id}</div>
-                            <div>Name: {project.name}</div>
-                            <div>Color: {project.color}</div>
+
                             <AddTask getData={getData} projectId={project.id} id="add-task" />
                         </div>
                     );
                 })}
             </div>
             <div className={showHideTasks}>
+            <h2>Tasks</h2>
                 {tasks.map((task) => {
+                    const project = projects.find((project) => project.id === task.projectId);
                     let color;
                     let hej;
                     projects.map((project) => {
@@ -138,31 +134,15 @@ function Overview() {
                             className="project-container task"
                             style={{ background: color }}
                         >
-                            <div>Id: {task.id}</div>
-                            <div>ProjId: {task.projectId}</div>
-                            <div>Title: {task.title}</div>
+                            <div>
+                                <b>Project: {project.name}</b>
+                            </div>
+                            <div>
+                                <b>Task: {task.title}</b>
+                            </div>
                             <button
                                 onClick={() => {
                                     deleteObject("tasks", task.id);
-                                }}
-                            >
-                                x
-                            </button>
-                        </div>
-                    );
-                })}
-            </div>
-            <div className={showHideTimelogs}>
-                {timelogs.map((timelog) => {
-                    return (
-                        <div key={`time_${timelog.id}`} className="project-container time">
-                            <div>Id: {timelog.id}</div>
-                            <div>TaskId: {timelog.taskId}</div>
-                            <div>Start: {timelog.start}</div>
-                            <div>End: {timelog.end}</div>
-                            <button
-                                onClick={() => {
-                                    deleteObject("timelogs", timelog.id);
                                 }}
                             >
                                 x
