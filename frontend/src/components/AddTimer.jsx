@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext, useRef } from "react";
 import DateObject from "react-date-object";
 import axios from "axios";
+import Navbar from "../components/Navbar";
 const host = "http://localhost:3000/";
 import { useProjectContext } from "../context/ProjectContext";
 
@@ -12,6 +13,7 @@ function AddTimer(props) {
     const [showHideTasks, setShowHideTasks] = useState("hidden");
     const [count, setCount] = useState(0);
     const [showTime, setShowTime] = useState();
+    const [warning, setWarning] = useState("Choose task to start timing");
     let color = [];
     const [timelog, setTimelog] = useState([]);
     let hej;
@@ -23,8 +25,9 @@ function AddTimer(props) {
         minute: 0,
         second: 0,
     });
+
     const task = tasks.find((task) => task.id === countId);
-    const project = projects.find((project) => project.id === task.projectId);
+    //const project = projects.find((project) => project.id === task.projectId);
 
     function startTimer() {
         if (active) {
@@ -39,7 +42,20 @@ function AddTimer(props) {
         setCount(0);
         patchTimer(task.id, !active, 0, 0, 0);
     }
-
+    function showTask(id, end, vis, color) {
+        if (!active) {
+            setCountId(id);
+            setCount(end);
+            setShowHideTasks(vis);
+            setTaskColor(color);
+        } else {
+            setWarning("You have to stop the timer before chosing another task");
+            setTimeout(() => {
+                setWarning("Choose task to start timing");
+            }, 3000);
+            return;
+        }
+    }
     useEffect(() => {
         if (active) {
             timer.current = setInterval(() => {
@@ -57,12 +73,17 @@ function AddTimer(props) {
         setShowTime(date.format("HH:mm:ss"));
     }, [count]);
 
-    if (!task || !project) {
-        return <div>Hittade inte det du letar efter</div>;
+    if (!task) {
+        return (
+            <div>
+                Didn't find timers
+                <Navbar />
+            </div>
+        );
     }
     return (
         <div>
-            Choose task to start timing
+            {warning}
             <br />
             {tasks.map((task, i) => {
                 projects.map((project) => {
@@ -71,12 +92,10 @@ function AddTimer(props) {
                 return (
                     <div key={i}>
                         <button
+                            className="timer-button"
                             style={{ borderColor: color[i] }}
                             onClick={() => {
-                                setCountId(task.id);
-                                setCount(task.end);
-                                setShowHideTasks("project-container task");
-                                setTaskColor(color[i]);
+                                showTask(task.id, task.end, "project-container task", color[i]);
                             }}
                         >
                             {task.title}
@@ -88,7 +107,7 @@ function AddTimer(props) {
             <div>
                 <div className={showHideTasks} style={{ background: taskColor }}>
                     <div>
-                        <b>Project: {project.name}</b>
+                        <b>Project: {/*project.name*/}</b>
                     </div>
                     <div>
                         <b>Task: {task.title}</b>

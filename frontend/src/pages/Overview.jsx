@@ -10,8 +10,6 @@ const host = "http://localhost:3000/";
 function Overview() {
     const providerValue = useProjectContext();
     const { projects, setProjects, tasks, setTasks, timelogs, setTimelogs } = useProjectContext();
-    //const { tasks, setTasks } = useProjectContext();
-    //const { timelogs, setTimelogs } = useProjectContext();
     const [showHideProjects, setShowHideProjects] = useState("visible");
     const [showHideTasks, setShowHideTasks] = useState("hidden");
     const [showHideTimelogs, setShowHideTimelogs] = useState("hidden");
@@ -35,10 +33,8 @@ function Overview() {
     async function deleteObject(element, id) {
         try {
             const response = await axios.delete(`${host}${element}/${id}`);
-            //console.log(id);
             await getData(element);
         } catch (error) {
-            //setErrorMsg(`${error.response.data.status}: ${error.response.data.message}`);
             console.log(error);
         }
     }
@@ -65,7 +61,7 @@ function Overview() {
     return (
         <div>
             <h1>
-                <a href="/overview">Overview</a>
+                Overview
             </h1>
 
             <div className={showHideProjects}>
@@ -76,6 +72,7 @@ function Overview() {
             </div>
 
             <button
+                className="tab-button"
                 onClick={() => {
                     getData("projects");
                     view("projects");
@@ -85,6 +82,7 @@ function Overview() {
                 Projects
             </button>
             <button
+                className="tab-button"
                 onClick={() => {
                     getData("tasks");
                     getData("projects");

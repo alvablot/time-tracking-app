@@ -9,60 +9,87 @@
       "name": "Hemma",
       "color": "#34dc3a",
       "id": 2
+    },
+    {
+      "name": "Sova",
+      "color": "#fb3a64",
+      "id": 3
     }
   ],
   "tasks": [
     {
-      "date": "2022-26-10",
+      "date": "2022-10-27",
       "projectId": 1,
-      "title": "Fixa inlm 1",
+      "title": "Hej",
       "start": 0,
-      "end": 2,
-      "timeElapsed": 2,
+      "end": 25,
+      "timeElapsed": 25,
       "active": false,
       "id": 1
     },
     {
-      "date": "2022-26-10",
+      "date": "2022-10-27",
       "projectId": 2,
-      "title": "Diska",
+      "title": "Jasså",
       "start": 0,
-      "end": 1522,
-      "timeElapsed": 1522,
+      "end": 3,
+      "timeElapsed": 3,
       "active": false,
       "id": 2
+    },
+    {
+      "date": "2022-10-27",
+      "projectId": 3,
+      "title": "Hmmmm",
+      "start": 0,
+      "end": 8,
+      "timeElapsed": 8,
+      "active": false,
+      "id": 3
     }
   ],
   "timelogs": [
     {
       "taskId": 1,
-      "timeElapsed": "00:00:27",
-      "date": "2022-26-10",
+      "timeElapsed": "00:00:12",
+      "date": "2022-10-27",
       "id": 1
     },
     {
       "taskId": 2,
-      "timeElapsed": "00:25:22",
-      "date": "2022-26-10",
+      "timeElapsed": "00:00:02",
+      "date": "2022-10-26",
       "id": 2
     },
     {
-      "taskId": 1,
-      "timeElapsed": "00:00:27",
-      "date": "2022-26-10",
+      "taskId": 3,
+      "timeElapsed": "00:00:07",
+      "date": "2022-10-25",
       "id": 3
     },
     {
-      "taskId": 1,
-      "timeElapsed": "00:00:27",
-      "date": "2022-26-10",
+      "taskId": 3,
+      "timeElapsed": "00:00:08",
+      "date": "2022-10-27",
       "id": 4
     },
     {
-      "taskId": 1,
-      "timeElapsed": "00:00:02",
-      "date": "2022-26-10",
+      "taskId": 2,
+      "timeElapsed": "00:00:03",
+      "date": "2022-10-27",
       "id": 5
+    },
+    {
+      "taskId": 1,
+      "timeElapsed": "00:00:20",
+      "date": "2022-10-27",
+      "id": 6
+    },
+    {
+      "taskId": 1,
+      "timeElapsed": "00:00:25",
+      "date": "2022-10-27",
+      "id": 7
     }
   ]
 }

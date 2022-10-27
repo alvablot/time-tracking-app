@@ -10,14 +10,15 @@
 nav {
     background-color: #242424;
     width: 100%;
+    height: 60px;
     position: fixed;
     bottom: 0px;
     left: 0px;
 }
 .active {
     background-color: #ffb651;
-    padding: 5px;
-    border-radius: 5px;;
+    padding: 5px 15px 5px 15px;
+
 }
 .active a {
     background-color: red;
@@ -27,10 +28,9 @@ nav {
     list-style-type: none;
     padding-left: 0;
 }
-
 .crumb {
     display: inline-block;
-    margin: 10px;
+    width: 33%;
 }
 .App {
     width: 100%;
@@ -60,6 +60,34 @@ nav {
     height: 150px;
     overflow-y: auto;
     width: 60%;
+}
+.calender {
+    background-color: rgb(255, 214, 160);
+    color: black;
+    text-align: center;
+    padding: 8px;
+    margin-bottom: 1px;
+}
+.calender-item {
+    margin-left: 5px;
+}
+.calender-button {
+    padding: 4px 10px 4px 10px;
+    border-radius: 0px;
+    margin-left: 10px;
+}
+.timer-button {
+    width: 90%;
+    margin: 5px 0px 5px 0px;
+    
+}
+.tab-button {
+    margin: 10px 0px 0px 0px;
+    border-radius: 0px;
+    width: 50%;
+}
+.tab-button:hover {
+    background-color: rgb(62, 62, 62);
 }
 .task {
     background-color: rgb(255, 214, 160);

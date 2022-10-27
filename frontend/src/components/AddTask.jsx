@@ -14,7 +14,7 @@ function AddTask(props) {
         if (taskName === "" || taskName === "Task title" || projectId < 1) return;
         try {
             const response = await axios.post(`${host}tasks`, {
-                date: date.format("YYYY-DD-MM"), 
+                date: date.format("YYYY-MM-DD"), 
                 projectId: projectId,
                 title: taskName,
                 start: 0,

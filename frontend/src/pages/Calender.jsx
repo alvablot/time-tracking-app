@@ -9,8 +9,10 @@ function Calender() {
     const providerValue = useProjectContext();
     const { projects, setProjects, tasks, setTasks, timelogs, setTimelogs } = useProjectContext();
     let [countId, setCountId] = useState(1);
+    const date = new DateObject();
+    const [foundTimelogs, setFoundTimelogs] = useState([]);
+    const [today, setToday] = useState(date.format("YYYY-MM-DD"));
 
-    let task = tasks.find((task) => task.id === countId);
     async function deleteObject(element, id) {
         try {
             const response = await axios.delete(`${host}${element}/${id}`);
@@ -24,38 +26,56 @@ function Calender() {
             const data = await providerValue.getProjects();
             setProjects(data);
         }
-        if (type === "tasks") {
-            const data = await providerValue.getTasks();
-            setTasks(data);
-        }
         if (type === "timelogs") {
             const data = await providerValue.getTimelogs();
             setTimelogs(data);
         }
     }
-    if (!task) {
-        return <div>Hittade inte det du letar efter</div>;
+    useEffect(() => {
+        setFoundTimelogs(timelogs);
+    }, [today]);
+    if (!foundTimelogs) {
+        return (
+            <div>
+                Didn't find foundTimelogs
+                <Navbar />
+            </div>
+        );
     }
     return (
         <div>
             <h1>Calender</h1>
+            <input
+                type="date"
+                onChange={(e) => {
+                    setToday(e.target.value);
+                }}
+                value={today}
+            />
             <div className="visible">
-                {timelogs.map((timelog) => {
-                    return (
-                        <div key={`timelog_${timelog.id}`} className="project-container time">
-                            <div>{timelog.id}</div>
-                            <div>date: {timelog.date}</div>
-                            <div>timeElapsed: {timelog.timeElapsed}</div>
-                            <button
-                                onClick={() => {
-                                    deleteObject("timelogs", timelog.id);
-                                }}
-                            >
-                                x
-                            </button>
-                        </div>
-                    );
-                })}
+                {foundTimelogs
+                    .filter((timelog) => timelog.date === today)
+                    .map((timelog) => {
+                        return (
+                            <div key={`timelog_${timelog.id}`} className="calender">
+                                <span className="calender-item">
+                                    <strong>{timelog.date}</strong>
+                                </span>
+                                <span className="calender-item">Id {timelog.id}</span>
+                                <span className="calender-item">
+                                    timeElapsed: {timelog.timeElapsed}
+                                </span>
+                                <button
+                                    className="calender-button"
+                                    onClick={() => {
+                                        deleteObject("timelogs", timelog.id);
+                                    }}
+                                >
+                                    x
+                                </button>
+                            </div>
+                        );
+                    })}
             </div>
             <Navbar />
         </div>
