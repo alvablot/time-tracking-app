@@ -14,9 +14,10 @@ function AddTimer(props) {
     const [count, setCount] = useState(0);
     const [showTime, setShowTime] = useState();
     const [warning, setWarning] = useState("Choose task to start timing");
+    const [projName, setProjName] = useState("");
     let color = [];
+    let name = [];
     const [timelog, setTimelog] = useState([]);
-    let hej;
     let timer = useRef(null);
     let [countId, setCountId] = useState(1);
     let [active, setActive] = useState(false);
@@ -27,7 +28,6 @@ function AddTimer(props) {
     });
 
     const task = tasks.find((task) => task.id === countId);
-    //const project = projects.find((project) => project.id === task.projectId);
 
     function startTimer() {
         if (active) {
@@ -42,12 +42,13 @@ function AddTimer(props) {
         setCount(0);
         patchTimer(task.id, !active, 0, 0, 0);
     }
-    function showTask(id, end, vis, color) {
+    function showTask(id, end, vis, color, name) {
         if (!active) {
             setCountId(id);
             setCount(end);
             setShowHideTasks(vis);
             setTaskColor(color);
+            setProjName(name);
         } else {
             setWarning("You have to stop the timer before chosing another task");
             setTimeout(() => {
@@ -87,7 +88,8 @@ function AddTimer(props) {
             <br />
             {tasks.map((task, i) => {
                 projects.map((project) => {
-                    project.id === task.projectId ? (color[i] = project.color) : (hej = null);
+                    project.id === task.projectId ? (name[i] = project.name) : null;
+                    project.id === task.projectId ? (color[i] = project.color) : null;
                 });
                 return (
                     <div key={i}>
@@ -95,7 +97,7 @@ function AddTimer(props) {
                             className="timer-button"
                             style={{ borderColor: color[i] }}
                             onClick={() => {
-                                showTask(task.id, task.end, "project-container task", color[i]);
+                                showTask(task.id, task.end, "project-container task", color[i], name[i]);
                             }}
                         >
                             {task.title}
@@ -107,7 +109,7 @@ function AddTimer(props) {
             <div>
                 <div className={showHideTasks} style={{ background: taskColor }}>
                     <div>
-                        <b>Project: {/*project.name*/}</b>
+                        <b>Project: {projName}</b>
                     </div>
                     <div>
                         <b>Task: {task.title}</b>

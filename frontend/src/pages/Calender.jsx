@@ -16,7 +16,6 @@ function Calender() {
     async function deleteObject(element, id) {
         try {
             const response = await axios.delete(`${host}${element}/${id}`);
-            await getData(element);
         } catch (error) {
             console.log(error);
         }
@@ -32,6 +31,7 @@ function Calender() {
         }
     }
     useEffect(() => {
+        getData("timelogs")
         setFoundTimelogs(timelogs);
     }, [today]);
     if (!foundTimelogs) {

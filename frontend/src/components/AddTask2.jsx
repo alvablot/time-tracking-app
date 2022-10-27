@@ -67,7 +67,7 @@ function AddTask2(props) {
                                     setProjectId(project.id);
                                 }}
                             >
-                                <span>Name: {project.name}</span>
+                                <span><strong>{project.name}</strong></span>
                             </div>
                         );
                     })}
