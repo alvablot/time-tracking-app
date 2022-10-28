@@ -34,7 +34,8 @@ function Timer() {
                 date: date.format("YYYY-MM-DD"),
             });
             const { data } = response;
-            setTimelogs([...timelogs, data]);
+            //console.log(timelogs, data)
+            setTimelogs(timelogs);
         } catch (error) {
             console.log(error);
         }
@@ -61,7 +62,7 @@ function Timer() {
                 timeElapsed: timeElapsed,
             });
             const { data } = response;
-            setTimelogs([...timelogs, data]);
+            // setTimelogs([...timelogs, data]);
         } catch (error) {
             console.log(error);
         }

@@ -7,7 +7,7 @@ const host = "http://localhost:3000/";
 
 function Calender() {
     const providerValue = useProjectContext();
-    const { projects, setProjects, tasks, setTasks, timelogs, setTimelogs } = useProjectContext();
+    const { projects, setProjects, tasks, setTasks, timelogs, setTimelogs, getTimelogs } = useProjectContext();
     let [countId, setCountId] = useState(1);
     const date = new DateObject();
     const [foundTimelogs, setFoundTimelogs] = useState([]);
@@ -16,6 +16,7 @@ function Calender() {
     async function deleteObject(element, id) {
         try {
             const response = await axios.delete(`${host}${element}/${id}`);
+            getTimelogs()
         } catch (error) {
             console.log(error);
         }
@@ -31,8 +32,8 @@ function Calender() {
         }
     }
     useEffect(() => {
-        getData("timelogs")
-        setFoundTimelogs(timelogs);
+        getTimelogs()
+        console.log(timelogs)
     }, [today]);
     if (!foundTimelogs) {
         return (
@@ -53,8 +54,7 @@ function Calender() {
                 value={today}
             />
             <div className="visible">
-                {foundTimelogs
-                    .filter((timelog) => timelog.date === today)
+                {timelogs.filter((timelog) => timelog.date === today)
                     .map((timelog) => {
                         return (
                             <div key={`timelog_${timelog.id}`} className="calender">

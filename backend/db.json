@@ -22,8 +22,8 @@
       "projectId": 1,
       "title": "Hej",
       "start": 0,
-      "end": 31,
-      "timeElapsed": 31,
+      "end": 19,
+      "timeElapsed": 19,
       "active": false,
       "id": 1
     },
@@ -32,8 +32,8 @@
       "projectId": 2,
       "title": "Jasså",
       "start": 0,
-      "end": 6,
-      "timeElapsed": 6,
+      "end": 11,
+      "timeElapsed": 11,
       "active": false,
       "id": 2
     },
@@ -42,8 +42,8 @@
       "projectId": 3,
       "title": "Hmmmm",
       "start": 0,
-      "end": 12,
-      "timeElapsed": 12,
+      "end": 27,
+      "timeElapsed": 27,
       "active": false,
       "id": 3
     },
@@ -52,18 +52,30 @@
       "projectId": 1,
       "title": "Brrrrr",
       "start": 0,
-      "end": 2,
-      "timeElapsed": 2,
+      "end": 10,
+      "timeElapsed": 10,
       "active": false,
       "id": 4
     }
   ],
   "timelogs": [
     {
-      "taskId": 3,
-      "timeElapsed": "00:00:12",
+      "taskId": 4,
+      "timeElapsed": "00:00:09",
       "date": "2022-10-27",
       "id": 2
+    },
+    {
+      "taskId": 4,
+      "timeElapsed": "00:00:10",
+      "date": "2022-10-28",
+      "id": 3
+    },
+    {
+      "taskId": 3,
+      "timeElapsed": "00:00:27",
+      "date": "2022-10-28",
+      "id": 4
     }
   ]
 }
