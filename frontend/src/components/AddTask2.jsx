@@ -6,16 +6,14 @@ const host = "http://localhost:3000/";
 
 function AddTask2(props) {
     const { trigger } = props;
-    const { projects } = useProjectContext();
-    const { tasks, setTasks } = useProjectContext();
-    const { timelogs } = useProjectContext();
+    const { tasks, setTasks, projects } = useProjectContext();
     const [taskName, setTaskName] = useState("Task title");
     const [projectId, setProjectId] = useState(0);
     const [color, setColor] = useState("");
     const [showHideTaskInput, setShowHideTaskInput] = useState(props.hidden);
     const [showHideSelectTask, setShowHideSelectTask] = useState("hidden");
     const [createButton, setCreateButton] = useState("visible");
-    let [errorMsg, setErrorMsg] = useState("");
+
     async function postTask(projectId) {
         const date = new DateObject();
         if (taskName === "" || taskName === "Task name" || projectId < 1) return;
@@ -35,7 +33,7 @@ function AddTask2(props) {
             console.log(error);
         }
     }
-    async function viewInput(element) {
+    function viewInput(element) {
         if (element === "create") {
             setShowHideTaskInput("visible");
             setCreateButton("hidden");

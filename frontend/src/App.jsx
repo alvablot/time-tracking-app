@@ -7,41 +7,45 @@ import Timer from "./pages/Timer";
 import Calender from "./pages/Calender";
 
 function Root() {
-    return (
-        <div>
-            <Outlet />
-        </div>
-    );
+  return (
+    <div>
+      <Outlet />
+    </div>
+  );
 }
 
 const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <Root />,
-        children: [
-
-            {
-                path: "overview",
-                element: <Overview />,
-            },
-            {
-                path: "timer",
-                element: <Timer />,
-            },
-            {
-                path: "calender",
-                element: <Calender />,
-            }
-        ],
-    },
+  {
+    path: "/",
+    element: <Root />,
+    errorElement: <Overview />,
+    children: [
+      {
+        path: "",
+        element: <Overview />,
+      },
+      {
+        path: "overview",
+        element: <Overview />,
+      },
+      {
+        path: "timer",
+        element: <Timer />,
+      },
+      {
+        path: "calender",
+        element: <Calender />,
+      },
+    ],
+  },
 ]);
 
 function App() {
-    return (
-        <div className="App">
-            <RouterProvider router={router} />
-        </div>
-    );
+  return (
+    <div className="App">
+      <RouterProvider router={router} />
+    </div>
+  );
 }
 
 export default App;

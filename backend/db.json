@@ -42,8 +42,8 @@
       "projectId": 3,
       "title": "Hmmmm",
       "start": 0,
-      "end": 27,
-      "timeElapsed": 27,
+      "end": 29,
+      "timeElapsed": 29,
       "active": false,
       "id": 3
     },
@@ -73,7 +73,7 @@
     },
     {
       "taskId": 3,
-      "timeElapsed": "00:00:27",
+      "timeElapsed": "00:00:29",
       "date": "2022-10-28",
       "id": 4
     }

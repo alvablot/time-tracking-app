@@ -8,7 +8,7 @@ const host = "http://localhost:3000/";
 
 function Timer() {
     const providerValue = useProjectContext();
-    const { projects, setProjects, tasks, setTasks, timelogs, setTimelogs } = useProjectContext();
+    const { setProjects, tasks, setTasks, timelogs, setTimelogs } = useProjectContext();
     const [dateTime, setDateTime] = useState(0);
 
     async function getData(type) {
@@ -34,7 +34,6 @@ function Timer() {
                 date: date.format("YYYY-MM-DD"),
             });
             const { data } = response;
-            //console.log(timelogs, data)
             setTimelogs(timelogs);
         } catch (error) {
             console.log(error);
@@ -61,8 +60,6 @@ function Timer() {
                 end: end,
                 timeElapsed: timeElapsed,
             });
-            const { data } = response;
-            // setTimelogs([...timelogs, data]);
         } catch (error) {
             console.log(error);
         }

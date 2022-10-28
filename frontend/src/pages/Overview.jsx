@@ -9,7 +9,7 @@ const host = "http://localhost:3000/";
 
 function Overview() {
     const providerValue = useProjectContext();
-    const { projects, setProjects, tasks, setTasks, timelogs, setTimelogs } = useProjectContext();
+    const { projects, setProjects, tasks, setTasks, setTimelogs } = useProjectContext();
     const [showHideProjects, setShowHideProjects] = useState("visible");
     const [showHideTasks, setShowHideTasks] = useState("hidden");
     const [showHideTimelogs, setShowHideTimelogs] = useState("hidden");

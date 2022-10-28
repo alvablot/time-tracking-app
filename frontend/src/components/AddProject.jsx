@@ -10,8 +10,8 @@ function AddProject(props) {
     const [color, setColor] = useState("#7d34dc");
     const [showHideProjectInput, setShowHideProjectInput] = useState("hidden");
     const [createButton, setCreateButton] = useState("visible");
-    let [errorMsg, setErrorMsg] = useState("");
-    async function postProject(e) {
+
+    async function postProject() {
         if (projectName === "") return;
         try {
             const response = await axios.post(`${host}projects`, {
