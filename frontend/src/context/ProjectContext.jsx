@@ -42,7 +42,6 @@ export function ProjectProvider(props) {
     setTasks,
     timelogs,
     setTimelogs,
-    setProjects,
     getProjects,
     getTasks,
     getTimelogs,

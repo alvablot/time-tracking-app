@@ -1,93 +1,44 @@
 {
   "projects": [
     {
-      "name": "Skolprojekt",
-      "color": "#af3bee",
+      "name": "Laga mat",
+      "color": "#e3da3b",
       "id": 1
     },
     {
-      "name": "Hemma",
-      "color": "#34dc3a",
+      "name": "Städa",
+      "color": "#af3bee",
       "id": 2
-    },
-    {
-      "name": "Sova",
-      "color": "#fb3a64",
-      "id": 3
     }
   ],
   "tasks": [
     {
-      "date": "2022-10-27",
+      "date": "2022-10-28",
       "projectId": 1,
-      "title": "Hej",
+      "title": "Pizza",
       "start": 0,
-      "end": 20,
-      "timeElapsed": 20,
+      "end": 9,
+      "timeElapsed": 9,
       "active": false,
       "id": 1
     },
     {
-      "date": "2022-10-27",
+      "date": "2022-10-28",
       "projectId": 2,
-      "title": "Jasså",
+      "title": "Toa",
       "start": 0,
-      "end": 12,
-      "timeElapsed": 12,
+      "end": 0,
+      "timeElapsed": 0,
       "active": false,
       "id": 2
-    },
-    {
-      "date": "2022-10-27",
-      "projectId": 3,
-      "title": "Hmmmm",
-      "start": 0,
-      "end": 29,
-      "timeElapsed": 29,
-      "active": false,
-      "id": 3
-    },
-    {
-      "date": "2022-10-27",
-      "projectId": 1,
-      "title": "Brrrrr",
-      "start": 0,
-      "end": 10,
-      "timeElapsed": 10,
-      "active": false,
-      "id": 4
     }
   ],
   "timelogs": [
     {
-      "taskId": 4,
-      "timeElapsed": "00:00:09",
-      "date": "2022-10-27",
-      "id": 2
-    },
-    {
-      "taskId": 4,
-      "timeElapsed": "00:00:10",
-      "date": "2022-10-28",
-      "id": 3
-    },
-    {
-      "taskId": 3,
-      "timeElapsed": "00:00:29",
-      "date": "2022-10-26",
-      "id": 4
-    },
-    {
       "taskId": 1,
-      "timeElapsed": "00:00:20",
-      "date": "2022-10-25",
-      "id": 5
-    },
-    {
-      "taskId": 2,
-      "timeElapsed": "00:00:12",
+      "timeElapsed": "00:00:09",
       "date": "2022-10-28",
-      "id": 6
+      "id": 1
     }
   ]
 }
