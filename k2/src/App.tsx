@@ -1,4 +1,4 @@
-import { useState, useEffect, Children } from "react";
+import { useState, useEffect, Children, ChangeEvent } from "react";
 // import { Project, Task, Timelog } from "./lib/interfaces";
 import { useProjectContext } from "./contexts/ProjContext";
 import timeSpanFormat from "time-span-format";
@@ -6,8 +6,25 @@ import timeSpanFormat from "time-span-format";
 import "./App.css";
 
 function App() {
-    const { project, setProject, task, setTask, task_30, setTask_30, timelog, setTimelog, invoice, setInvoice, fetchData } = useProjectContext();
-    const [priceInput, setPriceInput] = useState<string[]>([]);
+    const {
+        project,
+        setProject,
+        task,
+        setTask,
+        task_30,
+        setTask_30,
+        timelog,
+        setTimelog,
+        invoice,
+        setInvoice,
+        fetchData,
+        inputs,
+        setInputs,
+    } = useProjectContext();
+
+    const hideInput: string = "hidden";
+    const showInput: string = "visible";
+
     useEffect(() => {
         fetchData("projects", false);
         fetchData("tasks", true);
@@ -15,6 +32,9 @@ function App() {
         fetchData("tasks", false);
         fetchData("invoices", false);
     }, []);
+    useEffect(() => {
+        console.log(inputs);
+    }, [inputs]);
 
     return (
         <div className="App">
@@ -24,7 +44,7 @@ function App() {
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
-                        <th>Color</th>
+                        {/* <th>Color</th> */}
                         <th>Price</th>
                         <th>Invoice</th>
                         <th>Delete</th>
@@ -37,30 +57,13 @@ function App() {
                             <tr key={`project_${element.id}`} className="container">
                                 <td key={`id_${element.id}`}>{element.id}</td>
                                 <td key={`name_${element.id}`}>{element.name}</td>
-                                <td key={`color_${element.id}`}>{element.color}</td>
+                                {/* <td key={`color_${element.id}`}>{element.color}</td> */}
                                 <td key={`price_${element.id}`}>
-                                    <input
-                                        onFocus={(e) => {
-                                            e.target.className = "normalInput";
-                                            e.target.readOnly = false;
-                                        }}
-                                        onBlur={(e) => {
-                                            e.target.className = "readOnlyInput";
-                                            e.target.readOnly = false;
-                                            console.log("Nu jävlar uppdaterar vi!");
-                                        }}
-                                        onChange={(e) => {
-                                            setPriceInput((current) => [...current, e.target.value]);
-                                        
-                                        }}
-                                        type="number"
-                                        className="readOnlyInput"
-                                        readOnly
-                                        value={priceInput[i]}
-                                        // value={element.price}
-                                    />
+                                    <input type="number" className="normalInput" value={inputs[i]} />
                                 </td>
-                                <td>{isInvoice ? <button>Show</button> : <button>Create</button>}</td>
+                                <td>
+                                    {isInvoice ? <button>Show</button> : <button>Create</button>}
+                                </td>
                                 <td key={`delete1_${element.id}`}>
                                     <button>x</button>
                                 </td>

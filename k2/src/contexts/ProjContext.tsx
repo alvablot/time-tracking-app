@@ -22,6 +22,8 @@ interface ProjectContext {
     setTimelog: React.Dispatch<React.SetStateAction<Timelog[]>>;
     invoice: Invoice[];
     setInvoice: React.Dispatch<React.SetStateAction<Invoice[]>>;
+    inputs: number[];
+    setInputs: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
 // del 1
@@ -34,6 +36,7 @@ export const ProjectProvider = ({ children }: ProviderProps) => {
     const [task_30, setTask_30] = useState<Task[]>([]);
     const [timelog, setTimelog] = useState<Timelog[]>([]);
     const [invoice, setInvoice] = useState<Invoice[]>([]);
+    const [inputs, setInputs] = useState<number[]>([]);
 
     const fetchData = async (type: string, all: boolean): Promise<void> => {
         try {
@@ -42,6 +45,9 @@ export const ProjectProvider = ({ children }: ProviderProps) => {
             if (type === "projects") {
                 const projects: Project[] = response.data;
                 setProject(projects);
+                projects.map((element, i) => {
+                    setInputs((inputs) => [...inputs, element.price]);
+                });
             }
             if (type === "tasks") {
                 const tasks: Task[] = response.data;
@@ -90,6 +96,8 @@ export const ProjectProvider = ({ children }: ProviderProps) => {
                 setTask_30,
                 timelog,
                 setTimelog,
+                inputs,
+                setInputs,
             }}
         >
             {children}
