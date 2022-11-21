@@ -10,6 +10,13 @@ function App() {
         fetchData("projects");
         fetchData("tasks");
         fetchData("timelogs");
+        task.map((element, i) => {
+            console.log(element.date);
+            // newDates = element.date.split("-");
+            // console.log(newDates[0]);
+            // console.log(newDates[1]);
+            // console.log(newDates[2]);
+        });
     }, []);
 
     return (
