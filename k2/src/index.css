@@ -37,6 +37,7 @@ table {
 td,
 th {
     padding: 10px;
+    text-align: center;
 }
 th {
     background: #213547;
@@ -58,7 +59,9 @@ button {
     transition: border-color 0.25s;
 }
 .readOnlyInput {
+    text-align: center;
     background-color: transparent;
+    width: 2rem;
     font-size: 1em;
     font-weight: 500;
     font-family: inherit;
