@@ -5,9 +5,7 @@ import { ProjectProvider } from "./contexts/ProjContext";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-    <React.StrictMode>
-        <ProjectProvider>
-            <App />
-        </ProjectProvider>
-    </React.StrictMode>
+    <ProjectProvider>
+        <App />
+    </ProjectProvider>
 );

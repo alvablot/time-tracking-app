@@ -17,6 +17,7 @@ function AddProject(props) {
             const response = await axios.post(`${host}projects`, {
                 name: projectName,
                 color: color,
+                price: 0,
             });
             const { data } = response;
             console.log(response.data);

@@ -2,6 +2,7 @@ export interface Project {
     name: string;
     color: string;
     id: number;
+    price: number;
 }
 export interface Task {
     date: string;
@@ -19,3 +20,15 @@ export interface Timelog {
     date: string;
     id: number;
 }
+
+export interface Invoice {
+    id: number;
+    status: string;
+    due_date: string;
+    amount: number;
+    project: number;
+    customer_name: string;
+    created_date: string
+    
+}
+
