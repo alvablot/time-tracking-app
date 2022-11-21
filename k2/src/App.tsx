@@ -1,31 +1,11 @@
 import { useState, useEffect, Children } from "react";
-import fetchDataComp from "./lib/axios";
 import { Project, Task, Timelog } from "./lib/interfaces";
 import { useProjectContext } from "./contexts/ProjContext";
 import "./App.css";
-import axios from "axios";
-const host = "http://localhost:3000/";
 
 function App() {
-    const { project, setProject, task, setTask, timelog, setTimelog } = useProjectContext();
-
-    async function fetchData(type: string): Promise<void> {
-        const response = await axios.get(`${host}${type}`);
-
-        if (type === "projects") {
-            const projects: Project[] = response.data;
-            setProject(projects);
-        }
-        if (type === "tasks") {
-            const tasks: Task[] = response.data;
-            setTask(tasks);
-        }
-        if (type === "timelogs") {
-            const timelogs: Timelog[] = response.data;
-            setTimelog(timelogs);
-        }
-    }
-
+    const { project, setProject, task, setTask, timelog, setTimelog, fetchData } = useProjectContext();
+    const [lastTasks, setLastTasks] = useState<Task[]>([]);
     useEffect(() => {
         fetchData("projects");
         fetchData("tasks");
@@ -38,9 +18,9 @@ function App() {
             {project.map((element) => {
                 return (
                     <div key={`project_${element.id}`} className="container">
-                        <div key={`name_${element.id}`}>{element.name}</div>
-                        <div key={`color_${element.id}`}>{element.color}</div>
-                        <div key={`id_${element.id}`}>{element.id}</div>
+                        <div key={`name_${element.id}`}>Name {element.name}</div>
+                        <div key={`color_${element.id}`}>Color {element.color}</div>
+                        <div key={`id_${element.id}`}>Id {element.id}</div>
                     </div>
                 );
             })}
@@ -48,14 +28,14 @@ function App() {
             {task.map((element) => {
                 return (
                     <div key={`taks_${element.id}`} className="container">
-                        <div key={`date${element.id}`}>{element.date}</div>
-                        <div key={`projectId${element.id}`}>{element.projectId}</div>
-                        <div key={`title${element.id}`}>{element.title}</div>
-                        <div key={`start${element.id}`}>{element.start}</div>
-                        <div key={`end${element.id}`}>{element.end}</div>
-                        <div key={`timeElapsed${element.id}`}>{element.timeElapsed}</div>
-                        <div key={`active${element.id}`}>{element.active}</div>
-                        <div key={`task_id_${element.id}`}>{element.id}</div>
+                        <div key={`date${element.id}`}>Date {element.date}</div>
+                        <div key={`projectId${element.id}`}>Proj-id{element.projectId}</div>
+                        <div key={`title${element.id}`}>Title {element.title}</div>
+                        <div key={`start${element.id}`}>Start {element.start}</div>
+                        <div key={`end${element.id}`}>End {element.end}</div>
+                        <div key={`timeElapsed${element.id}`}>Duration {element.timeElapsed}</div>
+                        <div key={`active${element.id}`}>Active {element.active}</div>
+                        <div key={`task_id_${element.id}`}>Id {element.id}</div>
                     </div>
                 );
             })}
@@ -63,10 +43,10 @@ function App() {
             {timelog.map((element) => {
                 return (
                     <div key={`timelog_${element.id}`} className="container">
-                        <div key={`taskId${element.id}`}>{element.taskId}</div>
-                        <div key={`timeElapsed${element.id}`}>{element.timeElapsed}</div>
-                        <div key={`date2${element.id}`}>{element.date}</div>
-                        <div key={`timelog_id_${element.id}`}>{element.id}</div>
+                        <div key={`taskId${element.id}`}>Task-id{element.taskId}</div>
+                        <div key={`timeElapsed${element.id}`}>Duration {element.timeElapsed}</div>
+                        <div key={`date2${element.id}`}>Date {element.date}</div>
+                        <div key={`timelog_id_${element.id}`}>Id {element.id}</div>
                     </div>
                 );
             })}

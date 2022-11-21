@@ -1,10 +1,13 @@
 import { createContext, useContext, useState } from "react";
 import { Project, Task, Timelog } from "../lib/interfaces";
+import axios from "axios";
+const host = "http://localhost:3000/";
 
 interface ProviderProps {
     children?: React.ReactNode;
 }
 interface ProjectContext {
+    fetchData: React.Dispatch<React.SetStateAction<any>>;
     project: Project[];
     setProject: React.Dispatch<React.SetStateAction<Project[]>>;
     task: Task[];
@@ -12,6 +15,7 @@ interface ProjectContext {
     timelog: Timelog[];
     setTimelog: React.Dispatch<React.SetStateAction<Timelog[]>>;
 }
+
 // del 1
 const ProjectContext = createContext<ProjectContext | null>(null);
 
@@ -21,9 +25,27 @@ export const ProjectProvider = ({ children }: ProviderProps) => {
     const [task, setTask] = useState<Task[]>([]);
     const [timelog, setTimelog] = useState<Timelog[]>([]);
 
+    const fetchData = async (type: string): Promise<void> => {
+        const response = await axios.get(`${host}${type}`);
+
+        if (type === "projects") {
+            const projects: Project[] = response.data;
+            setProject(projects);
+        }
+        if (type === "tasks") {
+            const tasks: Task[] = response.data;
+            setTask(tasks);
+        }
+        if (type === "timelogs") {
+            const timelogs: Timelog[] = response.data;
+            setTimelog(timelogs);
+        }
+    };
+
     return (
         <ProjectContext.Provider
             value={{
+                fetchData,
                 project,
                 setProject,
                 task,
