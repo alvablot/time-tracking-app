@@ -6,19 +6,8 @@ import timeSpanFormat from "time-span-format";
 import "./App.css";
 
 function App() {
-    const {
-        project,
-        setProject,
-        task,
-        setTask,
-        task_30,
-        setTask_30,
-        timelog,
-        setTimelog,
-        invoice,
-        setInvoice,
-        fetchData,
-    } = useProjectContext();
+    const { project, setProject, task, setTask, task_30, setTask_30, timelog, setTimelog, invoice, setInvoice, fetchData } = useProjectContext();
+    const [priceInput, setPriceInput] = useState<string[]>([]);
     useEffect(() => {
         fetchData("projects", false);
         fetchData("tasks", true);
@@ -51,15 +40,27 @@ function App() {
                                 <td key={`color_${element.id}`}>{element.color}</td>
                                 <td key={`price_${element.id}`}>
                                     <input
-                                        type="text"
+                                        onFocus={(e) => {
+                                            e.target.className = "normalInput";
+                                            e.target.readOnly = false;
+                                        }}
+                                        onBlur={(e) => {
+                                            e.target.className = "readOnlyInput";
+                                            e.target.readOnly = false;
+                                            console.log("Nu jävlar uppdaterar vi!");
+                                        }}
+                                        onChange={(e) => {
+                                            setPriceInput((current) => [...current, e.target.value]);
+                                        
+                                        }}
+                                        type="number"
                                         className="readOnlyInput"
                                         readOnly
-                                        value={element.price}
+                                        value={priceInput[i]}
+                                        // value={element.price}
                                     />
                                 </td>
-                                <td>
-                                    {isInvoice ? <button>Show</button> : <button>Create</button>}
-                                </td>
+                                <td>{isInvoice ? <button>Show</button> : <button>Create</button>}</td>
                                 <td key={`delete1_${element.id}`}>
                                     <button>x</button>
                                 </td>

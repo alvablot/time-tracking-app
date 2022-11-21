@@ -14,7 +14,24 @@
     padding: 1.5em;
     will-change: filter;
 }
-
+.readOnlyInput {
+    text-align: center;
+    background-color: transparent;
+    width: 2rem;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    border: none;
+}
+.normalInput {
+    text-align: left;
+    background-color: grey;
+    width: 2rem;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    border: none;
+}
 .container {
     background: black;
     padding: 20px 50px 20px 50px;
