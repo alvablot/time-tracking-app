@@ -1,5 +1,5 @@
 import { useState, useEffect, Children, ChangeEvent } from "react";
-// import { Project, Task, Timelog } from "./lib/interfaces";
+import { Project, Task, Timelog, Invoice } from "./lib/interfaces";
 import { useProjectContext } from "./contexts/ProjContext";
 import timeSpanFormat from "time-span-format";
 
@@ -24,6 +24,21 @@ function App() {
 
     const hideInput: string = "hidden";
     const showInput: string = "visible";
+    const [invoiceProj, setInvoiceProj] = useState<Project[]>([
+        { name: "", color: "", id: 0, price: 0 },
+    ]);
+    const [invoiceTasks, setInvoiceTasks] = useState<Task[]>([
+        {
+            date: "",
+            projectId: 0,
+            title: "",
+            start: 0,
+            end: 0,
+            timeElapsed: 0,
+            active: false,
+            id: 0,
+        },
+    ]);
 
     useEffect(() => {
         fetchData("projects", false);
@@ -32,12 +47,62 @@ function App() {
         fetchData("tasks", false);
         fetchData("invoices", false);
     }, []);
+
     useEffect(() => {
-        console.log(inputs);
-    }, [inputs]);
+        console.log(invoiceTasks);
+    }, [invoiceTasks]);
+
+    function selectProj(e: any) {
+        const id: number = parseInt(e.target.value);
+        setInvoiceProj(project.filter((proj) => proj.id === id));
+    }
+    function selectTask(e: any) {
+        const id: number = parseInt(e.target.value);
+        const taskToPush: Task[] = task.filter((proj) => proj.id === id);
+        setInvoiceTasks((invoiceTasks) => [...invoiceTasks, taskToPush[0]]);
+    }
 
     return (
         <div className="App">
+            <div className="newInvoice">
+                <h2>Create invoice</h2>
+                <form>
+                    <h3>Choose project</h3>
+                    <div className="proj">
+                        <div>{invoiceProj[0].name}</div>
+                        {/* <div>{invoiceProj[0].id}</div> */}
+                        <div>{invoiceProj[0].price} kr/h</div>
+                    </div>
+                    <select
+                        onChange={(e) => {
+                            selectProj(e);
+                        }}
+                    >
+                        {project.map((element) => {
+                            return (
+                                <option value={element.id} key={`projOpt_${element.id}`}>
+                                    {element.name}
+                                </option>
+                            );
+                        })}
+                    </select>
+                    <h3>Add tasks</h3>
+                    <select
+                        onChange={(e) => {
+                            selectTask(e);
+                        }}
+                    >
+                        {task.map((element) => {
+                            return (
+                                <option value={element.id} key={`taskOpt_${element.id}`}>
+                                    {element.title}
+                                </option>
+                            );
+                        })}
+                    </select>
+                </form>
+            </div>
+
             <h2>Projects</h2>
             <table>
                 <thead>
@@ -59,7 +124,12 @@ function App() {
                                 <td key={`name_${element.id}`}>{element.name}</td>
                                 {/* <td key={`color_${element.id}`}>{element.color}</td> */}
                                 <td key={`price_${element.id}`}>
-                                    <input type="number" className="normalInput" value={inputs[i]} />
+                                    <input
+                                        type="number"
+                                        onChange={(e) => {}}
+                                        className="normalInput"
+                                        value={inputs[i]}
+                                    />
                                 </td>
                                 <td>
                                     {isInvoice ? <button>Show</button> : <button>Create</button>}
@@ -72,6 +142,7 @@ function App() {
                     })}
                 </tbody>
             </table>
+
             <h2>Tasks latest 30 days</h2>
             <table>
                 <thead>

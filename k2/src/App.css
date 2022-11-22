@@ -38,14 +38,19 @@
     font-family: inherit;
     border: none;
 }
-.container {
+.container, .newInvoice {
     background: black;
     padding: 20px 50px 20px 50px;
     margin: 5px;
     min-width: 320px;
     max-width: 600px;
     border: 1px solid #666;
+    margin-bottom: 30px;
 }
+.newInvoice {
+    text-align: left;
+}
+.proj {padding: 8px;}
 h2 {
     margin-top: 50px;
 }
