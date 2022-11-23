@@ -16,27 +16,33 @@ function App() {
         setTask_30,
         timelog,
         setTimelog,
+        timelog_30,
+        setTimelog_30,
         invoice,
         setInvoice,
         fetchData,
+        deletePost,
         inputs,
         setInputs,
     } = useProjectContext();
     let totalSeconds: number = 0;
+    let totalCash: number = 0;
     const hideInput: string = "hidden";
     const showInput: string = "visible";
 
+    const [projName, setProjName] = useState<string[]>([]);
     const [invoiceProj, setInvoiceProj] = useState<Project>();
     const [invoiceTasks, setInvoiceTasks] = useState<Task[]>([]);
     const [paid, setPaid] = useState<boolean>(false);
     const [inputName, setInputName] = useState<string>("");
+    const [emo, setEmo] = useState<string>("");
+    const [hidden, setHidden] = useState<string>("none");
 
     useEffect(() => {
-        fetchData("projects", false);
-        fetchData("tasks", true);
-        fetchData("timelogs", false);
-        fetchData("tasks", false);
-        fetchData("invoices", false);
+        fetchData("projects");
+        fetchData("tasks");
+        fetchData("timelogs");
+        fetchData("invoices");
     }, []);
 
     // useEffect(() => {
@@ -50,9 +56,10 @@ function App() {
     }
     function selectTask(e: React.ChangeEvent<HTMLSelectElement>): void {
         const id: number = parseInt(e.target.value);
-        if (id === -1) return;
-        const taskToPush: Task[] = task.filter((proj) => proj.id === id);
-        setInvoiceTasks((invoiceTasks) => [...invoiceTasks, taskToPush[0]]);
+        if (id > -1) {
+            const taskToPush: Task[] = task.filter((proj) => proj.id === id);
+            setInvoiceTasks((invoiceTasks) => [...invoiceTasks, taskToPush[0]]);
+        }
     }
     function deleteTaskFromInvoice(id: number): void {
         const newArr: Task[] = invoiceTasks.filter((task) => task.id !== id);
@@ -61,6 +68,30 @@ function App() {
     function makeHours(sec: number): number {
         const hours: number = Math.round((sec / 60 / 60) * 1000) / 1000;
         return hours;
+    }
+
+    async function uppdatePrice(price: number, id: number, i: number): Promise<void> {
+        try {
+            const response = await axios.patch(`${host}projects/${id}`, {
+                price: price,
+            });
+            fetchData("projects");
+            showEmo();
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                console.log(error);
+            } else {
+                console.log(error);
+            }
+        }
+    }
+    function showEmo(): void {
+        setEmo("👍");
+        setHidden("block");
+        setTimeout(() => {
+            setEmo("");
+            setHidden("none");
+        }, 2000);
     }
     async function postInvoice(
         projId: number,
@@ -82,18 +113,19 @@ function App() {
                 created_date: created,
             });
             const data: Invoice = response.data;
-            fetchData("invoices", false);
-        } catch (error: unknown) {
-            throw error;
+            fetchData("invoices");
+            showEmo();
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                console.log(error);
+            } else {
+                console.log(error);
+            }
         }
     }
     function saveInvoice(): void {
-        if (invoiceProj && invoiceTasks) {
+        if (invoiceProj && invoiceTasks && inputName) {
             console.log(invoiceProj.id);
-            // const tasksIds: number[] = [];
-            // invoiceTasks.forEach((element, i) => {
-            //     tasksIds.push(element.id);
-            // });
             console.log(paid);
             const now: Date = new Date();
             const year: number = now.getFullYear();
@@ -101,15 +133,18 @@ function App() {
             const date: number = now.getDate();
             const created: string = `${year.toString()}-${month.toString()}-${date.toString()}`;
             const due: string = `${year.toString()}-${(month + 1).toString()}-${date.toString()}`;
-            const amount: number = Math.ceil(makeHours(totalSeconds) * invoiceProj.price)
+            const amount: number = Math.ceil(makeHours(totalSeconds) * invoiceProj.price);
             console.log(created);
             console.log(due);
             postInvoice(invoiceProj.id, inputName, paid, amount, created, due);
-        } else return;
+        }
     }
 
     return (
         <div className="App">
+            <div id="box" style={{ display: `${hidden}` }}>
+                {emo}
+            </div>
             <div className="newInvoice">
                 <h2>Create invoice</h2>
                 <form>
@@ -126,10 +161,11 @@ function App() {
                                 </option>
                             );
                         })}
-                    </select>
+                    </select>{" "}
+                    *
                     <div className="proj">
                         <div>{invoiceProj ? invoiceProj.name : ""}</div>
-                        <div>{invoiceProj ? invoiceProj.price : ""} kr/h</div>
+                        <div>{invoiceProj ? invoiceProj.price + " kr/h" : ""}</div>
                     </div>
                     <select
                         onChange={(e) => {
@@ -144,15 +180,16 @@ function App() {
                                 </option>
                             );
                         })}
-                    </select>
+                    </select>{" "}
+                    *
                 </form>
                 <div className="proj">
                     <table>
                         <thead>
                             <tr>
-                                <th>Title</th>
-                                <th colSpan={2}>Time</th>
-                                <th>Delete</th>
+                                {invoiceProj ? <th>Title</th> : ""}
+                                {invoiceProj ? <th colSpan={2}>Time</th> : ""}
+                                {invoiceProj ? <th>Remove</th> : ""}
                             </tr>
                         </thead>
                         <tbody>
@@ -173,38 +210,49 @@ function App() {
                             })}
                         </tbody>
                     </table>
-                    Customer{" "}
-                    <input
-                        type="text"
-                        value={inputName}
-                        onChange={(e) => {
-                            setInputName(e.target.value);
-                        }}
-                    />
-                    <br />
-                    Paid{" "}
-                    <input
-                        type="checkbox"
-                        onChange={(e) => {
-                            e.target.checked ? setPaid(true) : setPaid(false);
-                        }}
-                    />
-                    <br />
-                    Total time {makeHours(totalSeconds)} hours
-                    <br />
-                    Total price{" "}
-                    {invoiceProj ? Math.ceil(makeHours(totalSeconds) * invoiceProj.price) : 0} kr
+                    <div className="gridContainer">
+                        <div>Customer </div>
+                        <div>
+                            <input
+                                required
+                                className="normalInput"
+                                type="text"
+                                value={inputName}
+                                onChange={(e) => {
+                                    setInputName(e.target.value);
+                                }}
+                            />
+                            *
+                        </div>
+                        <div> Paid </div>
+                        <div>
+                            <input
+                                type="checkbox"
+                                onChange={(e) => {
+                                    e.target.checked ? setPaid(true) : setPaid(false);
+                                }}
+                            />
+                        </div>
+                        <div>Total time</div>
+                        <div>{makeHours(totalSeconds)} hours</div>
+                        <div>Total price</div>
+                        <div>
+                            {invoiceProj
+                                ? Math.ceil(makeHours(totalSeconds) * invoiceProj.price)
+                                : 0}{" "}
+                            kr
+                        </div>
+                    </div>
                 </div>
                 <button onClick={() => saveInvoice()}>Save</button>
             </div>
-
             <h2>Projects</h2>
             <table>
                 <thead>
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
-                        <th>Price</th>
+                        <th>Price/h</th>
                         <th>Invoice</th>
                         <th>Delete</th>
                     </tr>
@@ -216,10 +264,10 @@ function App() {
                             <tr key={`project_${element.id}`} className="container">
                                 <td key={`id_${element.id}`}>{element.id}</td>
                                 <td key={`name_${element.id}`}>{element.name}</td>
-                                {/* <td key={`color_${element.id}`}>{element.color}</td> */}
-                                <td key={`price_${element.id}`}>
+                                <td key={`price_${element.id}`} className="priceTd">
                                     <input
                                         type="number"
+                                        step="10"
                                         onChange={(e: ChangeEvent<HTMLInputElement>) => {
                                             setInputs((previous) => {
                                                 const newInputs: number[] = [...previous];
@@ -230,12 +278,21 @@ function App() {
                                         className="normalInput"
                                         value={inputs[i]}
                                     />
+                                    <button
+                                        onClick={() => {
+                                            uppdatePrice(inputs[i], element.id, i);
+                                        }}
+                                    >
+                                        Uppdate
+                                    </button>
                                 </td>
                                 <td>
                                     {isInvoice ? <button>Show</button> : <button>Create</button>}
                                 </td>
                                 <td key={`delete1_${element.id}`}>
-                                    <button>x</button>
+                                    <button onClick={() => deletePost(element.id, "projects")}>
+                                        x
+                                    </button>
                                 </td>
                             </tr>
                         );
@@ -248,23 +305,20 @@ function App() {
                 <thead>
                     <tr>
                         <th>Title</th>
-                        <th>Date</th>
-                        <th>Proj-id</th>
-                        <th>Duration</th>
-                        <th>Id</th>
+                        <th>Project</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {task_30.map((element) => {
+                    {task_30.map((element, i) => {
+                        const filtered: Project[] = project.filter((obj) => {
+                            return obj.id === element.projectId;
+                        });
                         let time: string = timeSpanFormat(element.timeElapsed);
                         return (
                             <tr key={`taks_${element.id}`} className="container">
                                 <td key={`title_${element.id}`}>{element.title}</td>
-                                <td key={`date_${element.id}`}>{element.date}</td>
-                                <td key={`projectId_${element.id}`}>{element.projectId}</td>
-                                <td key={`timeElapsed_${element.id}`}>{time}</td>
-                                <td key={`task_id_${element.id}`}>{element.id}</td>
+                                <td key={`date_${element.id}`}>{filtered ? filtered[0].name : ""}</td>
                                 <td key={`delete2_${element.id}`}>
                                     <button>x</button>
                                 </td>
@@ -273,29 +327,25 @@ function App() {
                     })}
                 </tbody>
             </table>
-
             <h2>All tasks</h2>
             <table>
                 <thead>
                     <tr>
                         <th>Title</th>
-                        <th>Date</th>
-                        <th>Proj-id</th>
-                        <th>Duration</th>
-                        <th>Id</th>
+                        <th>Project</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     {task.map((element) => {
+                        const filtered: Project[] = project.filter((obj) => {
+                            return obj.id === element.projectId;
+                        });
                         let time: string = timeSpanFormat(element.timeElapsed);
                         return (
                             <tr key={`all_taks_${element.id}`} className="container">
                                 <td key={`all_title_${element.id}`}>{element.title}</td>
-                                <td key={`all_date_${element.id}`}>{element.date}</td>
-                                <td key={`all_projectId_${element.id}`}>{element.projectId}</td>
-                                <td key={`all_timeElapsed_${element.id}`}>{time}</td>
-                                <td key={`all_task_id_${element.id}`}>{element.id}</td>
+                                <td key={`all_date_${element.id}`}>{filtered[0].name}</td>
                                 <td key={`all_delete2_${element.id}`}>
                                     <button>x</button>
                                 </td>
@@ -305,14 +355,38 @@ function App() {
                 </tbody>
             </table>
 
-            <h2>Timelogs</h2>
+            <h2>Timelogs latest 30 days</h2>
             <table>
                 <thead>
                     <tr>
-                        <th>Task-id</th>
-                        <th>Duration</th>
                         <th>Date </th>
-                        <th>Id </th>
+                        <th>Duration</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {timelog_30.map((element) => {
+                        return (
+                            <tr key={`timelog_${element.id}`} className="container">
+                                <td key={`date2_${element.id}`}>{element.date}</td>
+                                <td key={`timeElapsed_${element.id}`}>{element.timeElapsed}</td>
+                                <td key={`delete3_${element.id}`}>
+                                    <button onClick={() => deletePost(element.id, "timelogs")}>
+                                        x
+                                    </button>
+                                </td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
+
+            <h2>All timelogs</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date </th>
+                        <th>Duration</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
@@ -320,12 +394,12 @@ function App() {
                     {timelog.map((element) => {
                         return (
                             <tr key={`timelog_${element.id}`} className="container">
-                                <td key={`taskId_${element.id}`}>{element.taskId}</td>
-                                <td key={`timeElapsed_${element.id}`}>{element.timeElapsed}</td>
                                 <td key={`date2_${element.id}`}>{element.date}</td>
-                                <td key={`timelog_id_${element.id}`}>{element.id}</td>
+                                <td key={`timeElapsed_${element.id}`}>{element.timeElapsed}</td>
                                 <td key={`delete3_${element.id}`}>
-                                    <button>x</button>
+                                    <button onClick={() => deletePost(element.id, "timelogs")}>
+                                        x
+                                    </button>
                                 </td>
                             </tr>
                         );
@@ -338,25 +412,20 @@ function App() {
                 <thead>
                     <tr>
                         <th>Status</th>
-                        <th>Proj</th>
                         <th>Customer</th>
-                        <th>Date</th>
-                        <th>Date ex.</th>
-                        <th>Id</th>
+                        <th>Exp. date</th>
                         <th>Amount</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     {invoice.map((element) => {
+                        totalCash += element.amount;
                         return (
                             <tr key={`invoice_${element.id}`} className="container">
                                 <td key={`status_${element.id}`}>{element.status}</td>
-                                <td key={`project2_${element.id}`}>{element.project}</td>
                                 <td key={`customer_name_${element.id}`}>{element.customer_name}</td>
-                                <td key={`created_date_${element.id}`}>{element.created_date}</td>
                                 <td key={`due_date_${element.id}`}>{element.due_date}</td>
-                                <td key={`invoice_id_${element.id}`}>{element.id}</td>
                                 <td key={`amount_${element.id}`}>{element.amount} kr</td>
                                 <td key={`delete4_${element.id}`}>
                                     <button>x</button>
@@ -364,6 +433,13 @@ function App() {
                             </tr>
                         );
                     })}
+                    <tr>
+                        <td className="totalCash" colSpan={8}>
+                            <b>
+                                Total amount: <u>{totalCash}</u> kr
+                            </b>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>

@@ -4,6 +4,15 @@
     padding: 2rem;
     text-align: center;
 }
+#box {
+    font-size: 20vh;
+    position: absolute;
+    margin: 0 auto;
+    padding: 5rem;
+    left: 50%;
+    top: 50%;
+    transform: translate(-51%, -51%);
+}
 .tasks {
     background-color: red;
     margin: 6px;
@@ -20,6 +29,9 @@
 .visible {
     display: block;
 }
+.priceTd {
+    text-align: right;
+}
 .readOnlyInput {
     text-align: center;
     background-color: transparent;
@@ -29,14 +41,18 @@
     font-family: inherit;
     border: none;
 }
+.totalCash {
+    text-align: right;
+}
 .normalInput {
     text-align: left;
     background-color: grey;
-    width: 4rem;
+    width: 6rem;
     font-size: 1em;
-    padding: 1px 8px;
+    padding-right: 0px;
     font-family: inherit;
     border-radius: 8px;
+    margin-right: 10px;
 }
 .container,
 .newInvoice {
@@ -49,7 +65,7 @@
     margin-bottom: 30px;
 }
 .newInvoice {
-    text-align: left;
+    text-align: center;
 }
 .proj {
     padding: 8px;
@@ -68,6 +84,15 @@ h2 {
 .logo.react:hover {
     filter: drop-shadow(0 0 2em #61dafbaa);
 }
+.gridContainer {
+    display: grid;
+    grid-template-columns: 170px 170px;
+}
+.gridContainer > div {
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    text-align: left;
+}
+
 .x {
     background: black;
     cursor: grab;
