@@ -1,6 +1,6 @@
 :root {
     font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-    font-size: 16px;
+    font-size: 1.1rem;
     line-height: 24px;
     font-weight: 400;
 
@@ -14,7 +14,11 @@
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
 }
-
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
 a {
     font-weight: 500;
     color: #646cff;
@@ -28,17 +32,19 @@ body {
     margin: 0;
     display: flex;
     place-items: center;
-    min-width: 320px;
+    width: 100%;
     min-height: 100vh;
 }
 table {
     width: 100%;
     margin-bottom: 30px;
+    background-color: #242424;
 }
 td,
 th {
-    padding: 1%;
+    padding: 8px;
     text-align: center;
+    background-color: black;
 }
 th {
     background: #213547;
@@ -53,11 +59,12 @@ h2 {
 }
 select {
     min-width: 150px;
+    font-size: 1rem;
 }
 button {
     border-radius: 8px;
     border: 1px solid transparent;
-    padding: 0.2em 1em;
+    padding: 1px 8px;
     font-size: 1em;
     font-weight: 500;
     font-family: inherit;

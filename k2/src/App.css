@@ -34,25 +34,33 @@
     background-color: grey;
     width: 4rem;
     font-size: 1em;
-    font-weight: 500;
+    padding: 1px 8px;
     font-family: inherit;
-    border: none;
+    border-radius: 8px;
 }
-.container, .newInvoice {
+.container,
+.newInvoice {
     background: black;
     padding: 20px 50px 20px 50px;
     margin: 5px;
     min-width: 320px;
-    max-width: 600px;
+    max-width: 800px;
     border: 1px solid #666;
     margin-bottom: 30px;
 }
 .newInvoice {
     text-align: left;
 }
-.proj {padding: 8px;}
+.proj {
+    padding: 8px;
+}
 h2 {
     margin-top: 50px;
+}
+.taskinv {
+    text-align: left;
+    background-color: rgb(0, 0, 0);
+    padding-left: 20px;
 }
 .logo:hover {
     filter: drop-shadow(0 0 2em #646cffaa);

@@ -29,6 +29,5 @@ export interface Invoice {
     project: number;
     customer_name: string;
     created_date: string
-    
 }
 
