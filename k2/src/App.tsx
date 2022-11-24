@@ -27,9 +27,11 @@ function App() {
     } = useProjectContext();
     let totalSeconds: number = 0;
     let totalCash: number = 0;
+    let roundTimeMin: number;
     const hideInput: string = "hidden";
     const showInput: string = "visible";
 
+    const [roundedTime, setRoundedTime] = useState<number[]>([]);
     const [projName, setProjName] = useState<string[]>([]);
     const [invoiceProj, setInvoiceProj] = useState<Project>();
     const [invoiceTasks, setInvoiceTasks] = useState<Task[]>([]);
@@ -139,7 +141,12 @@ function App() {
             postInvoice(invoiceProj.id, inputName, paid, amount, created, due);
         }
     }
-
+    function roundTime(step: number, min: number, id: number): number {
+        const remain: number = min % step;
+        const rest: number = min - remain;
+        const result: number = rest + step;
+        return result;
+    }
     return (
         <div className="App">
             <div id="box" style={{ display: `${hidden}` }}>
@@ -195,10 +202,90 @@ function App() {
                         <tbody>
                             {invoiceTasks.map((task, i: number) => {
                                 totalSeconds += task.timeElapsed;
+                                roundTimeMin = Math.round((task.timeElapsed / 60) * 100) / 100;
                                 return (
                                     <tr key={i}>
                                         <td className="taskinv">{task.title}</td>
-                                        <td className="taskinv">{makeHours(task.timeElapsed)}</td>
+                                        <td className="taskinv">
+                                            {makeHours(task.timeElapsed)}h {task.timeElapsed}sec
+                                            <br />
+                                            <span className="roundLinks2">
+                                                {roundedTime[i]} min
+                                            </span>{" "}
+                                            Round{" "}
+                                            <span
+                                                className="roundLinks"
+                                                onClick={() => {
+                                                    setRoundedTime((previous) => {
+                                                        const newInputs: number[] = [...previous];
+                                                        newInputs[i] = roundTime(
+                                                            1,
+                                                            Math.round(
+                                                                (task.timeElapsed / 60) * 100
+                                                            ) / 100,
+                                                            task.id
+                                                        );
+                                                        return newInputs;
+                                                    });
+                                                }}
+                                            >
+                                                1
+                                            </span>
+                                            <span
+                                                className="roundLinks"
+                                                onClick={() => {
+                                                    setRoundedTime((previous) => {
+                                                        const newInputs: number[] = [...previous];
+                                                        newInputs[i] = roundTime(
+                                                            5,
+                                                            Math.round(
+                                                                (task.timeElapsed / 60) * 100
+                                                            ) / 100,
+                                                            task.id
+                                                        );
+                                                        return newInputs;
+                                                    });
+                                                }}
+                                            >
+                                                5
+                                            </span>
+                                            <span
+                                                className="roundLinks"
+                                                onClick={() => {
+                                                    setRoundedTime((previous) => {
+                                                        const newInputs: number[] = [...previous];
+                                                        newInputs[i] = roundTime(
+                                                            15,
+                                                            Math.round(
+                                                                (task.timeElapsed / 60) * 100
+                                                            ) / 100,
+                                                            task.id
+                                                        );
+                                                        return newInputs;
+                                                    });
+                                                }}
+                                            >
+                                                15
+                                            </span>
+                                            <span
+                                                className="roundLinks"
+                                                onClick={() => {
+                                                    setRoundedTime((previous) => {
+                                                        const newInputs: number[] = [...previous];
+                                                        newInputs[i] = roundTime(
+                                                            30,
+                                                            Math.round(
+                                                                (task.timeElapsed / 60) * 100
+                                                            ) / 100,
+                                                            task.id
+                                                        );
+                                                        return newInputs;
+                                                    });
+                                                }}
+                                            >
+                                                30
+                                            </span>
+                                        </td>
                                         <td className="taskinv">hours</td>
                                         <td>
                                             <button onClick={() => deleteTaskFromInvoice(task.id)}>
@@ -318,7 +405,9 @@ function App() {
                         return (
                             <tr key={`taks_${element.id}`} className="container">
                                 <td key={`title_${element.id}`}>{element.title}</td>
-                                <td key={`date_${element.id}`}>{filtered ? filtered[0].name : ""}</td>
+                                <td key={`date_${element.id}`}>
+                                    {filtered ? filtered[0].name : ""}
+                                </td>
                                 <td key={`delete2_${element.id}`}>
                                     <button>x</button>
                                 </td>

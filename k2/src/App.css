@@ -44,6 +44,16 @@
 .totalCash {
     text-align: right;
 }
+.roundLinks {
+    cursor: grab;
+    color:aqua;
+    padding-right:5px;
+}
+.roundLinks2 {
+    cursor: grab;
+    color:rgb(248, 78, 223);
+    padding-right:5px;
+}
 .normalInput {
     text-align: left;
     background-color: grey;
