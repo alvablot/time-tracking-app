@@ -43,14 +43,6 @@ export const ProjectProvider = ({ children }: ProviderProps) => {
     const [invoice, setInvoice] = useState<Invoice[]>([]);
     const [inputs, setInputs] = useState<number[]>([]);
 
-    function get30(i: number, date: string): number {
-        Dates[i] = parse(date, "YYYY-MM-DD");
-        const time: number = Dates[i].getTime();
-        const days: number =
-            Math.round(thisTime / 1000 / 60 / 60 / 24) - Math.round(time / 1000 / 60 / 60 / 24);
-        return days;
-    }
-
     const fetchData = async (type: string): Promise<void> => {
         try {
             const response = await axios.get(`${host}${type}`);
@@ -65,22 +57,10 @@ export const ProjectProvider = ({ children }: ProviderProps) => {
             if (type === "tasks") {
                 const tasks: Task[] = response.data;
                 setTask(tasks);
-                tasks.map((element, i) => {
-                    const days: number = get30(i, element.date);
-                    if (days < 31) {
-                        setTask_30((task_30) => [...task_30, element]);
-                    }
-                });
             }
             if (type === "timelogs") {
                 const timelogs: Timelog[] = response.data;
                 setTimelog(timelogs);
-                timelogs.map((element, i) => {
-                    const days: number = get30(i, element.date);
-                    if (days < 31) {
-                        setTimelog_30((timelog_30) => [...timelog_30, element]);
-                    }
-                });
             }
             if (type === "invoices") {
                 const invoice: Invoice[] = response.data;
@@ -98,14 +78,6 @@ export const ProjectProvider = ({ children }: ProviderProps) => {
     async function deletePost(id: number, endpoint: string): Promise<void> {
         try {
             await axios.delete(`${host}${endpoint}/${id}`);
-            const response = await axios.get(`${host}${endpoint}`);
-            if (endpoint === "projects") {
-                fetchData("projects");
-            }
-            if (endpoint === "timelogs") {
-                const timelogs: Timelog[] = response.data;
-                setTimelog(timelogs);
-            }
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.log(error);
