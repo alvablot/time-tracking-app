@@ -59,6 +59,7 @@
 .roundLinks2 {
     cursor: grab;
     color: rgb(248, 78, 223);
+    font-size: 0.9rem;
 }
 .normalInput,
 .priceinput {
@@ -78,7 +79,7 @@
 .container,
 .newInvoice {
     background: black;
-    padding: 20px 50px 20px 50px;
+    padding: 10px 10px 10px 10px;
     margin: 5px;
     min-width: 320px;
     max-width: 800px;
@@ -150,15 +151,19 @@ h2 {
     display: none;
 }
 #hider {
-    position: absolute;
+    position: fixed;
     width: 100%;
-    height: 250vh;
+    height: 110vh;
     background-color: rgb(0, 0, 0, 0.9);
     left: 0px;
     top: 0px;
+    margin: 0;
 }
 #open-menu {
     cursor: grab;
+    margin-right:12px;
+    position: relative;
+    top: -5px;
 }
 .card {
     padding: 2em;

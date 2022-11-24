@@ -54,7 +54,7 @@ function CreateInvoice() {
             const amount: number = Math.ceil(makeHours(totalSeconds) * invoiceProj.price);
             postInvoice(invoiceProj.id, inputName, paid, amount, created, due);
         } else {
-            showEmo("🙅🏼‍♀️");
+            showEmo("🙅🏻‍♀️");
         }
     }
     async function postInvoice(
@@ -151,7 +151,7 @@ function CreateInvoice() {
                                         {makeHours(
                                             roundedTime[i] ? roundedTime[i] * 60 : task.timeElapsed
                                         )}{" "}
-                                        h{" "}
+                                        h<br />
                                         <span className="roundLinks2">
                                             ({roundedTime[i] ? roundedTime[i] : roundTimeMin} min)
                                         </span>
