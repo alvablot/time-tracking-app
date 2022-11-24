@@ -55,7 +55,6 @@ function App() {
     useEffect(() => {
         const days: Timelog[] = timelog.filter((element) => get30B(element.date) < 32);
         setTimelog_30(days);
-        console.log(timelog_30);
     }, [timelog]);
 
     function showEmo(type: string): void {

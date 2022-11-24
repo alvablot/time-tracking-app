@@ -4,156 +4,175 @@
       "name": "Laga mat",
       "color": "#e3da3b",
       "id": 1,
-      "price": 100
+      "price": 200
     },
     {
       "name": "Städa",
       "color": "#af3bee",
       "id": 2,
-      "price": 100
+      "price": 400
     },
     {
-      "name": "Test",
+      "name": "Koda",
       "color": "#fb3a64",
-      "price": 0,
+      "price": 2500,
       "id": 3
     }
   ],
   "invoices": [
     {
-      "id": 1,
-      "status": "ej betald",
-      "due_date": "2022-12-15T10:49:33.081Z",
-      "amount": 9001,
+      "status": "Ej betald",
+      "due_date": "2020-11-20",
+      "amount": 333,
       "project": 1,
-      "customer_name": "Ryan",
-      "created_date": "2022-11-16T10:49:33.081Z"
+      "customer_name": "Olle",
+      "created_date": "2020-10-20",
+      "id": 1
+    },
+    {
+      "status": "Betald",
+      "due_date": "2021-05-02",
+      "amount": 800,
+      "project": 1,
+      "customer_name": "Petter",
+      "created_date": "2021-04-02",
+      "id": 2
+    },
+    {
+      "status": "Ej betald",
+      "due_date": "2022-11-23",
+      "amount": 65,
+      "project": 2,
+      "customer_name": "Oscar",
+      "created_date": "2022-10-23",
+      "id": 3
+    },
+    {
+      "status": "Betald",
+      "due_date": "2022-11-21",
+      "amount": 120,
+      "project": 2,
+      "customer_name": "Lena",
+      "created_date": "2022-10-21",
+      "id": 4
+    },
+    {
+      "status": "Betald",
+      "due_date": "2022-09-22",
+      "amount": 260,
+      "project": 3,
+      "customer_name": "Jan",
+      "created_date": "2022-08-22",
+      "id": 5
+    },
+    {
+      "status": "Betald",
+      "due_date": "2022-10-24",
+      "amount": 1250,
+      "project": 3,
+      "customer_name": "Olle",
+      "created_date": "2022-09-24",
+      "id": 6
     }
   ],
   "tasks": [
     {
-      "date": "2022-10-01",
+      "date": "2022-10-20",
       "projectId": 1,
       "title": "Pizza",
       "start": 0,
-      "end": 9,
-      "timeElapsed": 9,
+      "end": 10,
+      "timeElapsed": 1000,
       "active": false,
       "id": 1
     },
     {
-      "date": "2022-10-10",
-      "projectId": 2,
-      "title": "Blaha",
+      "date": "2022-10-23",
+      "projectId": 1,
+      "title": "Lasagne",
       "start": 0,
-      "end": 0,
-      "timeElapsed": 1042,
+      "end": 6,
+      "timeElapsed": 666,
       "active": false,
       "id": 2
     },
     {
-      "date": "2022-10-15",
+      "date": "2022-10-23",
       "projectId": 2,
-      "title": "Blaha",
+      "title": "Toa",
       "start": 0,
-      "end": 0,
-      "timeElapsed": 7575,
+      "end": 5,
+      "timeElapsed": 10000,
       "active": false,
       "id": 3
     },
     {
-      "date": "2022-10-19",
+      "date": "2022-11-23",
       "projectId": 2,
-      "title": "sadfsdgsdgs",
+      "title": "Flyttstäd",
       "start": 0,
-      "end": 0,
-      "timeElapsed": 666,
+      "end": 10,
+      "timeElapsed": 6000,
       "active": false,
       "id": 4
     },
     {
-      "date": "2022-10-28",
-      "projectId": 2,
-      "title": "Hej",
+      "date": "2022-11-23",
+      "projectId": 3,
+      "title": "TypeScript",
       "start": 0,
-      "end": 10,
-      "timeElapsed": 10,
+      "end": 4,
+      "timeElapsed": 666,
       "active": false,
       "id": 5
     },
     {
-      "date": "2022-11-05",
-      "projectId": 2,
-      "title": "Sova",
+      "date": "2022-11-23",
+      "projectId": 3,
+      "title": "JavaScript",
       "start": 0,
-      "end": 0,
-      "timeElapsed": 5757,
+      "end": 5,
+      "timeElapsed": 5,
       "active": false,
       "id": 6
-    },
-    {
-      "date": "2022-11-10",
-      "projectId": 2,
-      "title": "Bada",
-      "start": 0,
-      "end": 0,
-      "timeElapsed": 10,
-      "active": false,
-      "id": 7
-    },
-    {
-      "date": "2022-11-19",
-      "projectId": 2,
-      "title": "Träna",
-      "start": 0,
-      "end": 0,
-      "timeElapsed": 7524,
-      "active": false,
-      "id": 8
     }
   ],
   "timelogs": [
     {
       "taskId": 1,
-      "timeElapsed": "00:00:09",
-      "date": "2022-10-28",
+      "timeElapsed": "00:00:10",
+      "date": "2022-10-20",
       "id": 1
     },
     {
       "taskId": 2,
-      "timeElapsed": "00:00:09",
-      "date": "2022-10-28",
+      "timeElapsed": "00:00:06",
+      "date": "2022-10-23",
       "id": 2
     },
     {
-      "taskId": 2,
-      "timeElapsed": "00:00:09",
-      "date": "2022-10-28",
+      "taskId": 3,
+      "timeElapsed": "00:00:05",
+      "date": "2022-11-23",
       "id": 3
     },
     {
-      "taskId": 3,
-      "timeElapsed": "00:00:09",
-      "date": "2022-10-28",
+      "taskId": 4,
+      "timeElapsed": "00:00:10",
+      "date": "2022-11-23",
       "id": 4
     },
     {
-      "taskId": 3,
-      "timeElapsed": "00:00:09",
-      "date": "2022-10-28",
+      "taskId": 5,
+      "timeElapsed": "00:00:04",
+      "date": "2022-11-23",
       "id": 5
     },
     {
-      "taskId": 4,
-      "timeElapsed": "00:00:09",
-      "date": "2022-10-28",
+      "taskId": 6,
+      "timeElapsed": "00:00:05",
+      "date": "2022-11-23",
       "id": 6
-    },
-    {
-      "taskId": 5,
-      "timeElapsed": "00:00:10",
-      "date": "2022-11-21",
-      "id": 7
     }
   ]
 }
