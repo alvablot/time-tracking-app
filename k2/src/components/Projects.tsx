@@ -31,14 +31,13 @@ function Projects() {
         }
     }
     return (
-        <div>
+        <div className="projects">
             <h2>Projects</h2>
             <table>
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Price kr/h</th>
-                        <th>Invoice</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
@@ -71,9 +70,9 @@ function Projects() {
                                         }}
                                     />
                                 </td>
-                                <td>
+                                {/* <td>
                                     {isInvoice ? <button>Show</button> : <button>Create</button>}
-                                </td>
+                                </td> */}
                                 <td key={`delete1_${element.id}`}>
                                     <button
                                         onClick={() => {

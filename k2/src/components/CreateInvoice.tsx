@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { Project, Task, Invoice } from "../lib/interfaces";
 import { useProjectContext } from "../contexts/ProjContext";
-
 import axios from "axios";
-
 const host: string = "http://localhost:3000/";
 
 function CreateInvoice() {
