@@ -195,24 +195,28 @@ function App() {
                         <thead>
                             <tr>
                                 {invoiceProj ? <th>Title</th> : ""}
-                                {invoiceProj ? <th colSpan={2}>Time</th> : ""}
+                                {invoiceProj ? <th>Time</th> : ""}
                                 {invoiceProj ? <th>Remove</th> : ""}
                             </tr>
                         </thead>
                         <tbody>
                             {invoiceTasks.map((task, i: number) => {
-                                totalSeconds += task.timeElapsed;
+                                roundedTime[i]
+                                    ? (totalSeconds += roundedTime[i] * 60)
+                                    : (totalSeconds += task.timeElapsed);
                                 roundTimeMin = Math.round((task.timeElapsed / 60) * 100) / 100;
                                 return (
                                     <tr key={i}>
                                         <td className="taskinv">{task.title}</td>
                                         <td className="taskinv">
-                                            {makeHours(task.timeElapsed)}h {task.timeElapsed}sec
+                                            {makeHours(
+                                                roundedTime[i]
+                                                    ? roundedTime[i] * 60
+                                                    : task.timeElapsed
+                                            )}
+                                            h {roundedTime[i] ? roundedTime[i] : roundTimeMin}min
                                             <br />
-                                            <span className="roundLinks2">
-                                                {roundedTime[i]} min
-                                            </span>{" "}
-                                            Round{" "}
+                                            Round up{" "}
                                             <span
                                                 className="roundLinks"
                                                 onClick={() => {
@@ -285,8 +289,10 @@ function App() {
                                             >
                                                 30
                                             </span>
+                                            <span className="roundLinks2">
+                                                {roundedTime[i] ? roundedTime[i] + " min" : ""}
+                                            </span>
                                         </td>
-                                        <td className="taskinv">hours</td>
                                         <td>
                                             <button onClick={() => deleteTaskFromInvoice(task.id)}>
                                                 x
