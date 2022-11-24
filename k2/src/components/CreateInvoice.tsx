@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState } from "react";
 import { Project, Task, Invoice } from "../lib/interfaces";
 import { useProjectContext } from "../contexts/ProjContext";
 
@@ -6,12 +6,8 @@ import axios from "axios";
 
 const host: string = "http://localhost:3000/";
 
-function CreateInvoice(props: any) {
-    const {
-        project,
-        task,
-        fetchData,
-    } = useProjectContext();
+function CreateInvoice() {
+    const { project, task, fetchData, showEmo } = useProjectContext();
     let totalSeconds: number = 0;
     let roundTimeMin: number;
 
@@ -23,8 +19,9 @@ function CreateInvoice(props: any) {
 
     function selectProj(e: React.ChangeEvent<HTMLSelectElement>): void {
         const id: number = parseInt(e.target.value);
-        if (id === -1) return;
-        setInvoiceProj(project.find((proj) => proj.id === id));
+        if (id > -1) {
+            setInvoiceProj(project.find((proj) => proj.id === id));
+        }
     }
     function selectTask(e: React.ChangeEvent<HTMLSelectElement>): void {
         const id: number = parseInt(e.target.value);
@@ -59,7 +56,7 @@ function CreateInvoice(props: any) {
             const amount: number = Math.ceil(makeHours(totalSeconds) * invoiceProj.price);
             postInvoice(invoiceProj.id, inputName, paid, amount, created, due);
         } else {
-            props.showEmo("🙅🏼‍♀️");
+            showEmo("🙅🏼‍♀️");
         }
     }
     async function postInvoice(
@@ -83,7 +80,7 @@ function CreateInvoice(props: any) {
             });
             const data: Invoice = response.data;
             fetchData("invoices");
-            props.showEmo("👍🏼");
+            showEmo("👍🏼");
             setInvoiceTasks([]);
             setPaid(false);
             setInputName("");

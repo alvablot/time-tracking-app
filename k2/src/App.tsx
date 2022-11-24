@@ -20,13 +20,13 @@ function App() {
         timelog,
         setTimelog_30,
         timelog_30,
-        invoice,
         fetchData,
         deletePost,
+        emo,
+        hidden,
     } = useProjectContext();
 
-    const [emo, setEmo] = useState<string>("");
-    const [hidden, setHidden] = useState<string>("none");
+    const [visibleMenu, setVisibleMenu] = useState<string>("none");
 
     function fetchAll(): void {
         fetchData("projects");
@@ -57,22 +57,56 @@ function App() {
         setTimelog_30(days);
     }, [timelog]);
 
-    function showEmo(type: string): void {
-        setEmo(type);
-        setHidden("block");
-        setTimeout(() => {
-            setEmo("");
-            setHidden("none");
-        }, 2000);
-    }
-
+    useEffect(() => {
+        console.log(visibleMenu);
+    }, [visibleMenu]);
     return (
         <div className="App">
+            <div
+                id="hider"
+                style={{ display: visibleMenu }}
+                onClick={() => {
+                    setVisibleMenu("none");
+                }}
+            ></div>
+            <div id="menuBar">
+                <span
+                    id="open-menu"
+                    onClick={() => {
+                        setVisibleMenu("block");
+                    }}
+                >
+                    ...
+                </span>
+            </div>
+            <div
+                id="menuContainer"
+                style={{ display: visibleMenu }}
+                onClick={() => {
+                    setVisibleMenu("none");
+                }}
+            >
+                <ul>
+                    <li>Overview</li>
+                    <li>Projects</li>
+                    <li>Tasks</li>
+                    <ul>
+                        <li>Last 30 days</li>
+                        <li>All</li>
+                    </ul>
+                    <li>Timelogs</li>
+                    <ul>
+                        <li>Last 30 days</li>
+                        <li>All</li>
+                    </ul>
+                    <li>Invoices</li>
+                </ul>
+            </div>
             <div id="box" style={{ display: `${hidden}` }}>
                 {emo}
             </div>
-            <CreateInvoice showEmo={showEmo} />
-            <Projects showEmo={showEmo} />
+            <CreateInvoice />
+            <Projects />
             <h2>Tasks latest 30 days</h2>
             <table>
                 <thead>

@@ -4,7 +4,7 @@ import axios from "axios";
 import updateImg from "../assets/icon-for-update.png";
 const host: string = "http://localhost:3000/";
 
-function Projects(props: any) {
+function Projects() {
     const {
         project,
         invoice,
@@ -12,23 +12,24 @@ function Projects(props: any) {
         deletePost,
         inputs,
         setInputs,
+        showEmo,
     } = useProjectContext();
 
     async function uppdatePrice(price: number, id: number, i: number): Promise<void> {
-      try {
-          const response = await axios.patch(`${host}projects/${id}`, {
-              price: price,
-          });
-          fetchData("projects");
-          props.showEmo("👍🏼");
-      } catch (error) {
-          if (axios.isAxiosError(error)) {
-              console.log(error);
-          } else {
-              console.log(error);
-          }
-      }
-  }
+        try {
+            const response = await axios.patch(`${host}projects/${id}`, {
+                price: price,
+            });
+            fetchData("projects");
+            showEmo("👍🏼");
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                console.log(error);
+            } else {
+                console.log(error);
+            }
+        }
+    }
     return (
         <div>
             <h2>Projects</h2>
@@ -36,7 +37,7 @@ function Projects(props: any) {
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Price/h</th>
+                        <th>Price kr/h</th>
                         <th>Invoice</th>
                         <th>Delete</th>
                     </tr>

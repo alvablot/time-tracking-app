@@ -13,6 +13,7 @@ interface ProviderProps {
 }
 interface ProjectContext {
     fetchData: (type: string) => void;
+    showEmo: (type: string) => void;
     deletePost: (id: number, endpoint: string) => void;
     project: Project[];
     setProject: React.Dispatch<React.SetStateAction<Project[]>>;
@@ -28,6 +29,10 @@ interface ProjectContext {
     setInvoice: React.Dispatch<React.SetStateAction<Invoice[]>>;
     inputs: number[];
     setInputs: React.Dispatch<React.SetStateAction<number[]>>;
+    emo: string;
+    setEmo: React.Dispatch<React.SetStateAction<string>>;
+    hidden: string;
+    setHidden: React.Dispatch<React.SetStateAction<string>>;
 }
 
 // del 1
@@ -42,6 +47,8 @@ export const ProjectProvider = ({ children }: ProviderProps) => {
     const [timelog, setTimelog] = useState<Timelog[]>([]);
     const [invoice, setInvoice] = useState<Invoice[]>([]);
     const [inputs, setInputs] = useState<number[]>([]);
+    const [emo, setEmo] = useState<string>("");
+    const [hidden, setHidden] = useState<string>("none");
 
     const fetchData = async (type: string): Promise<void> => {
         try {
@@ -86,11 +93,19 @@ export const ProjectProvider = ({ children }: ProviderProps) => {
             }
         }
     }
-
+    function showEmo(type: string): void {
+        setEmo(type);
+        setHidden("block");
+        setTimeout(() => {
+            setEmo("");
+            setHidden("none");
+        }, 2000);
+    }
     return (
         <ProjectContext.Provider
             value={{
                 invoice,
+                showEmo,
                 setInvoice,
                 fetchData,
                 deletePost,
@@ -106,6 +121,10 @@ export const ProjectProvider = ({ children }: ProviderProps) => {
                 setTimelog_30,
                 inputs,
                 setInputs,
+                emo,
+                setEmo,
+                hidden,
+                setHidden,
             }}
         >
             {children}
