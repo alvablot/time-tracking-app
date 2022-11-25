@@ -73,6 +73,24 @@
       "customer_name": "Olle",
       "created_date": "2022-09-24",
       "id": 6
+    },
+    {
+      "status": "Ej betald",
+      "due_date": "2022-11-24",
+      "amount": 1000,
+      "project": 1,
+      "customer_name": "Göran",
+      "created_date": "2022-10-24",
+      "id": 7
+    },
+    {
+      "status": "Ej betald",
+      "due_date": "2022-11-24",
+      "amount": 107,
+      "project": 1,
+      "customer_name": "Letti",
+      "created_date": "2022-10-24",
+      "id": 8
     }
   ],
   "tasks": [
@@ -167,12 +185,6 @@
       "timeElapsed": "00:00:04",
       "date": "2022-11-23",
       "id": 5
-    },
-    {
-      "taskId": 6,
-      "timeElapsed": "00:00:05",
-      "date": "2022-11-23",
-      "id": 6
     }
   ]
 }

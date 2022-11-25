@@ -128,7 +128,7 @@ export const ProjectProvider = ({ children }: ProviderProps) => {
     const [showTimelogs30, setShowTimelogs30] = useState<string>("block");
     const [showInvoices, setShowInvoices] = useState<string>("block");
     const [showOverview, setShowOverview] = useState<string>("block");
-    const [showMenu, setShowMenu] = useState<string>("block");
+    const [showMenu, setShowMenu] = useState<string>("none");
     return (
         <ProjectContext.Provider
             value={{
