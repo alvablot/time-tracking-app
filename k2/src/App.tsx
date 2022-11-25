@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Project, Task, Timelog } from "./lib/interfaces";
 import { useProjectContext } from "./contexts/ProjContext";
 import timeSpanFormat from "time-span-format";
 import { parse } from "date-format-parse";
 const now: Date = new Date();
 const thisTime: number = now.getTime();
+const thisYear: number = now.getFullYear();
 
 import "./App.css";
 import Projects from "./components/Projects";
@@ -23,6 +24,7 @@ function App() {
         timelog_30,
         fetchData,
         deletePost,
+        invoice,
         emo,
         hidden,
         showCreateInvoice,
@@ -37,6 +39,9 @@ function App() {
         setShowMenu,
         get30B,
     } = useProjectContext();
+    const monthsArray: string[] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
+    const [monthResults, setMonthResults] = useState<number[]>();
+    const resultArray: number[] = [];
 
     function fetchAll(): void {
         fetchData("projects");

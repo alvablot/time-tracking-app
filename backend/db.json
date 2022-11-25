@@ -40,57 +40,84 @@
     },
     {
       "status": "Ej betald",
-      "due_date": "2022-11-23",
+      "due_date": "2022-01-23",
       "amount": 65,
       "project": 2,
       "customer_name": "Oscar",
-      "created_date": "2022-10-23",
+      "created_date": "2021-12-23",
       "id": 3
     },
     {
       "status": "Betald",
-      "due_date": "2022-11-21",
+      "due_date": "2022-03-21",
       "amount": 120,
       "project": 2,
       "customer_name": "Lena",
-      "created_date": "2022-10-21",
+      "created_date": "2022-02-21",
       "id": 4
     },
     {
       "status": "Betald",
-      "due_date": "2022-09-22",
+      "due_date": "2022-04-22",
       "amount": 260,
       "project": 3,
       "customer_name": "Jan",
-      "created_date": "2022-08-22",
+      "created_date": "2022-03-22",
       "id": 5
     },
     {
       "status": "Ej betald",
-      "due_date": "2022-10-25",
+      "due_date": "2022-05-25",
       "amount": 1250,
       "project": 3,
       "customer_name": "Olle",
-      "created_date": "2022-09-24",
+      "created_date": "2022-04-24",
       "id": 6
     },
     {
       "status": "Ej betald",
-      "due_date": "2022-11-24",
+      "due_date": "2022-06-24",
       "amount": 1000,
       "project": 1,
       "customer_name": "Göran",
-      "created_date": "2022-10-24",
+      "created_date": "2022-05-24",
       "id": 7
     },
     {
       "status": "Ej betald",
-      "due_date": "2022-12-24",
-      "amount": 107,
+      "due_date": "2022-09-24",
+      "amount": 750,
       "project": 1,
       "customer_name": "Letti",
-      "created_date": "2022--24",
-      "id": 8
+      "created_date": "2022-08-24",
+      "id": 10
+    },
+    {
+      "status": "Ej betald",
+      "due_date": "2022-11-24",
+      "amount": 8000,
+      "project": 1,
+      "customer_name": "Letti",
+      "created_date": "2022-10-24",
+      "id": 12
+    },
+    {
+      "status": "Ej betald",
+      "due_date": "2022-12-24",
+      "amount": 11000,
+      "project": 1,
+      "customer_name": "Letti",
+      "created_date": "2022-11-24",
+      "id": 13
+    },
+    {
+      "status": "Ej betald",
+      "due_date": "2022-12-24",
+      "amount": 9000,
+      "project": 1,
+      "customer_name": "Letti",
+      "created_date": "2022-11-24",
+      "id": 14
     }
   ],
   "tasks": [

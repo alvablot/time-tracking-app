@@ -102,12 +102,6 @@ h2 {
     background-color: rgb(0, 0, 0);
     padding-left: 20px;
 }
-.logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-    filter: drop-shadow(0 0 2em #61dafbaa);
-}
 .gridContainer {
     display: grid;
     grid-template-columns: 120px auto;
@@ -117,7 +111,19 @@ h2 {
     text-align: left;
     margin-top: 6px;
 }
-
+.dia-container {
+    border: 1px solid green;
+    justify-content: center;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px;
+}
+.dia-container  > div {
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    text-align: center;
+    padding: 2px;
+}
+.dia-box {}
 .x {
     background: black;
     cursor: grab;
@@ -176,5 +182,5 @@ h2 {
 }
 .status {
     font-size: 2rem;
-    cursor:crosshair;
+    cursor: crosshair;
 }
