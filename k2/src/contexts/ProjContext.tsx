@@ -102,6 +102,9 @@ export const ProjectProvider = ({ children }: ProviderProps) => {
     };
 
     async function deletePost(id: number, endpoint: string): Promise<void> {
+        if (!confirm(`Are you sure you want to delete ${endpoint} post ${id} `)) {
+            return;
+        }
         try {
             await axios.delete(`${host}${endpoint}/${id}`);
         } catch (error) {
