@@ -2,16 +2,24 @@ import { useProjectContext } from "../contexts/ProjContext";
 
 function Menu() {
     const {
+        showCreateInvoice,
         setShowCreateInvoice,
+        showProjects,
         setShowProjects,
+        showTasks,
         setShowTasks,
+        showTasks30,
         setShowTasks30,
+        showTimelogs,
         setShowTimelogs,
+        showTimelogs30,
         setShowTimelogs30,
+        showInvoices,
         setShowInvoices,
+        showOverview,
         setShowOverview,
-        showMenu,
         setShowMenu,
+        showMenu,
     } = useProjectContext();
     return (
         <div
@@ -36,7 +44,11 @@ function Menu() {
                             setShowOverview("block");
                         }}
                     >
-                        Overview
+                        {showOverview === "block" ? (
+                            <b className="roundLinks">Overview</b>
+                        ) : (
+                            "Overview"
+                        )}
                     </a>
                 </li>
                 <li>
@@ -53,7 +65,11 @@ function Menu() {
                             setShowOverview("none");
                         }}
                     >
-                        Projects
+                        {showProjects === "block" ? (
+                            <b className="roundLinks">Projects</b>
+                        ) : (
+                            "Projects"
+                        )}
                     </a>
                 </li>
                 <li>Tasks</li>
@@ -72,7 +88,11 @@ function Menu() {
                                 setShowOverview("none");
                             }}
                         >
-                            Last 30 days
+                            {showTasks30 === "block" ? (
+                                <b className="roundLinks">Last 30 days</b>
+                            ) : (
+                                "Last 30 days"
+                            )}
                         </a>
                     </li>
                     <li>
@@ -89,7 +109,7 @@ function Menu() {
                                 setShowOverview("none");
                             }}
                         >
-                            All
+                            {showTasks === "block" ? <b className="roundLinks">All</b> : "All"}
                         </a>
                     </li>
                 </ul>
@@ -109,7 +129,11 @@ function Menu() {
                                 setShowOverview("none");
                             }}
                         >
-                            Last 30 days
+                            {showTimelogs30 === "block" ? (
+                                <b className="roundLinks">Last 30 days</b>
+                            ) : (
+                                "Last 30 days"
+                            )}
                         </a>
                     </li>
                     <li>
@@ -126,7 +150,7 @@ function Menu() {
                                 setShowOverview("none");
                             }}
                         >
-                            All
+                            {showTimelogs === "block" ? <b className="roundLinks">All</b> : "All"}
                         </a>
                     </li>
                 </ul>
@@ -146,7 +170,11 @@ function Menu() {
                                 setShowOverview("none");
                             }}
                         >
-                            Create
+                            {showCreateInvoice === "block" ? (
+                                <b className="roundLinks">Create new</b>
+                            ) : (
+                                "Create new"
+                            )}
                         </a>
                     </li>
                     <li>
@@ -163,7 +191,7 @@ function Menu() {
                                 setShowOverview("none");
                             }}
                         >
-                            All
+                            {showInvoices === "block" ? <b className="roundLinks">All</b> : "All"}
                         </a>
                     </li>
                 </ul>

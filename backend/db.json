@@ -66,8 +66,8 @@
       "id": 5
     },
     {
-      "status": "Betald",
-      "due_date": "2022-10-24",
+      "status": "Ej betald",
+      "due_date": "2022-10-25",
       "amount": 1250,
       "project": 3,
       "customer_name": "Olle",
@@ -85,11 +85,11 @@
     },
     {
       "status": "Ej betald",
-      "due_date": "2022-11-24",
+      "due_date": "2022-12-24",
       "amount": 107,
       "project": 1,
       "customer_name": "Letti",
-      "created_date": "2022-10-24",
+      "created_date": "2022--24",
       "id": 8
     }
   ],
@@ -175,13 +175,13 @@
       "id": 3
     },
     {
-      "taskId": 4,
+      "taskId": 3,
       "timeElapsed": "00:00:10",
       "date": "2022-11-23",
       "id": 4
     },
     {
-      "taskId": 5,
+      "taskId": 3,
       "timeElapsed": "00:00:04",
       "date": "2022-11-23",
       "id": 5

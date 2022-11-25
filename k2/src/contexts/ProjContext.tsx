@@ -1,17 +1,17 @@
 import { createContext, useContext, useState } from "react";
 import { Project, Task, Timelog, Invoice } from "../lib/interfaces";
 import axios from "axios";
-import { AxiosError } from "axios";
+import timeSpanFormat from "time-span-format";
 import { parse } from "date-format-parse";
-const host: string = "http://localhost:3000/";
-const Dates: Date[] = [];
 const now: Date = new Date();
 const thisTime: number = now.getTime();
+const host: string = "http://localhost:3000/";
 
 interface ProviderProps {
     children?: React.ReactNode;
 }
 interface ProjectContext {
+    get30B: (date: string) => number;
     fetchData: (type: string) => void;
     showEmo: (type: string) => void;
     deletePost: (id: number, endpoint: string) => void;
@@ -120,6 +120,15 @@ export const ProjectProvider = ({ children }: ProviderProps) => {
             setHidden("none");
         }, 2000);
     }
+
+    function get30B(date: string): number {
+        const dates: Date = parse(date, "YYYY-MM-DD");
+        const time: number = dates.getTime();
+        const days: number =
+            Math.round(thisTime / 1000 / 60 / 60 / 24) - Math.round(time / 1000 / 60 / 60 / 24);
+        return days;
+    }
+
     const [showCreateInvoice, setShowCreateInvoice] = useState<string>("block");
     const [showProjects, setShowProjects] = useState<string>("block");
     const [showTasks, setShowTasks] = useState<string>("block");
@@ -171,6 +180,7 @@ export const ProjectProvider = ({ children }: ProviderProps) => {
                 setShowOverview,
                 showMenu,
                 setShowMenu,
+                get30B,
             }}
         >
             {children}

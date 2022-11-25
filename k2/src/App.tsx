@@ -1,5 +1,5 @@
-import { useEffect} from "react";
-import { Project, Task, Timelog} from "./lib/interfaces";
+import { useEffect } from "react";
+import { Project, Task, Timelog } from "./lib/interfaces";
 import { useProjectContext } from "./contexts/ProjContext";
 import timeSpanFormat from "time-span-format";
 import { parse } from "date-format-parse";
@@ -35,6 +35,7 @@ function App() {
         showOverview,
         showMenu,
         setShowMenu,
+        get30B,
     } = useProjectContext();
 
     function fetchAll(): void {
@@ -47,14 +48,6 @@ function App() {
     useEffect(() => {
         fetchAll();
     }, []);
-
-    function get30B(date: string): number {
-        const dates: Date = parse(date, "YYYY-MM-DD");
-        const time: number = dates.getTime();
-        const days: number =
-            Math.round(thisTime / 1000 / 60 / 60 / 24) - Math.round(time / 1000 / 60 / 60 / 24);
-        return days;
-    }
 
     useEffect(() => {
         const days: Task[] = task.filter((element) => get30B(element.date) < 32);

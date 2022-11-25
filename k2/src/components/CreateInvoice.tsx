@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Project, Task, Invoice } from "../lib/interfaces";
 import { useProjectContext } from "../contexts/ProjContext";
 import axios from "axios";
@@ -12,6 +12,7 @@ function CreateInvoice() {
     const [roundedTime, setRoundedTime] = useState<number[]>([]);
     const [invoiceProj, setInvoiceProj] = useState<Project>();
     const [invoiceTasks, setInvoiceTasks] = useState<Task[]>([]);
+    const [invoiceTasksOptions, setInvoiceTasksOptions] = useState<Task[]>([]);
     const [paid, setPaid] = useState<boolean>(false);
     const [inputName, setInputName] = useState<string>("");
 
@@ -19,25 +20,30 @@ function CreateInvoice() {
         const id: number = parseInt(e.target.value);
         if (id > -1) {
             setInvoiceProj(project.find((proj) => proj.id === id));
-        }
+            setInvoiceTasks(task.filter((task) => task.projectId === id));
+        } 
     }
+
     function selectTask(e: React.ChangeEvent<HTMLSelectElement>): void {
         const id: number = parseInt(e.target.value);
         if (id > -1) {
             const taskToPush: Task[] = task.filter((proj) => proj.id === id);
-            setInvoiceTasks((invoiceTasks) => [...invoiceTasks, taskToPush[0]]);
+            setInvoiceTasksOptions((invoiceTasksOptions) => [...invoiceTasksOptions, taskToPush[0]]);
         }
     }
+
     function deleteTaskFromInvoice(id: number): void {
-        const newArr: Task[] = invoiceTasks.filter((task) => task.id !== id);
-        setInvoiceTasks(newArr);
+        const newArr: Task[] = invoiceTasksOptions.filter((task) => task.id !== id);
+        setInvoiceTasksOptions(newArr);
     }
+
     function roundTime(step: number, min: number, id: number): number {
         const remain: number = min % step;
         const rest: number = min - remain;
         const result: number = rest + step;
         return result;
     }
+
     function makeHours(sec: number): number {
         const hours: number = Math.round((sec / 60 / 60) * 1000) / 1000;
         return hours;
@@ -119,7 +125,7 @@ function CreateInvoice() {
                     }}
                 >
                     <option value="-1">Add task to invoice</option>
-                    {task.map((element) => {
+                    {invoiceTasks.map((element) => {
                         return (
                             <option value={element.id} key={`taskOpt_${element.id}`}>
                                 {element.title}
@@ -139,7 +145,7 @@ function CreateInvoice() {
                         </tr>
                     </thead>
                     <tbody>
-                        {invoiceTasks.map((task, i: number) => {
+                        {invoiceTasksOptions.map((task, i: number) => {
                             roundedTime[i]
                                 ? (totalSeconds += roundedTime[i] * 60)
                                 : (totalSeconds += task.timeElapsed);
