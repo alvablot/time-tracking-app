@@ -1,26 +1,22 @@
 import { useProjectContext } from "../contexts/ProjContext";
+import { useState, useEffect } from "react";
 
 function Menu() {
-    const {
-        showCreateInvoice,
-        setShowCreateInvoice,
-        showProjects,
-        setShowProjects,
-        showTasks,
-        setShowTasks,
-        showTasks30,
-        setShowTasks30,
-        showTimelogs,
-        setShowTimelogs,
-        showTimelogs30,
-        setShowTimelogs30,
-        showInvoices,
-        setShowInvoices,
-        showOverview,
-        setShowOverview,
-        setShowMenu,
-        showMenu,
-    } = useProjectContext();
+    const { setShowMenu, showMenu, showHideContent, setShowHideContent } = useProjectContext();
+
+    function toggleContent(index: number, all: boolean) {
+        const newArr: string[] = [];
+        showHideContent.map((element, i) => {
+            if (all) {
+                newArr[i] = "block";
+            } else {
+                newArr[i] = "none";
+                newArr[index] = "block";
+            }
+        });
+        setShowHideContent(newArr);
+    }
+
     return (
         <div
             id="menuContainer"
@@ -34,17 +30,10 @@ function Menu() {
                     <a
                         href="#"
                         onClick={() => {
-                            setShowProjects("block");
-                            setShowTasks30("block");
-                            setShowTasks("block");
-                            setShowTimelogs30("block");
-                            setShowTimelogs("block");
-                            setShowCreateInvoice("block");
-                            setShowInvoices("block");
-                            setShowOverview("block");
+                            toggleContent(-1, true);
                         }}
                     >
-                        {showOverview === "block" ? (
+                        {showHideContent[-1] === "block" ? (
                             <b className="roundLinks">Overview</b>
                         ) : (
                             "Overview"
@@ -55,17 +44,10 @@ function Menu() {
                     <a
                         href="#"
                         onClick={() => {
-                            setShowProjects("block");
-                            setShowTasks30("none");
-                            setShowTasks("none");
-                            setShowTimelogs30("none");
-                            setShowTimelogs("none");
-                            setShowCreateInvoice("none");
-                            setShowInvoices("none");
-                            setShowOverview("none");
+                            toggleContent(0, false);
                         }}
                     >
-                        {showProjects === "block" ? (
+                        {showHideContent[0] === "block" ? (
                             <b className="roundLinks">Projects</b>
                         ) : (
                             "Projects"
@@ -78,17 +60,10 @@ function Menu() {
                         <a
                             href="#"
                             onClick={() => {
-                                setShowProjects("none");
-                                setShowTasks30("block");
-                                setShowTasks("none");
-                                setShowTimelogs30("none");
-                                setShowTimelogs("none");
-                                setShowCreateInvoice("none");
-                                setShowInvoices("none");
-                                setShowOverview("none");
+                                toggleContent(1, false);
                             }}
                         >
-                            {showTasks30 === "block" ? (
+                            {showHideContent[1] === "block" ? (
                                 <b className="roundLinks">Last 30 days</b>
                             ) : (
                                 "Last 30 days"
@@ -99,17 +74,14 @@ function Menu() {
                         <a
                             href="#"
                             onClick={() => {
-                                setShowProjects("none");
-                                setShowTasks30("none");
-                                setShowTasks("block");
-                                setShowTimelogs30("none");
-                                setShowTimelogs("none");
-                                setShowCreateInvoice("none");
-                                setShowInvoices("none");
-                                setShowOverview("none");
+                                toggleContent(2, false);
                             }}
                         >
-                            {showTasks === "block" ? <b className="roundLinks">All</b> : "All"}
+                            {showHideContent[2] === "block" ? (
+                                <b className="roundLinks">All</b>
+                            ) : (
+                                "All"
+                            )}
                         </a>
                     </li>
                 </ul>
@@ -119,17 +91,10 @@ function Menu() {
                         <a
                             href="#"
                             onClick={() => {
-                                setShowProjects("none");
-                                setShowTasks30("none");
-                                setShowTasks("none");
-                                setShowTimelogs30("block");
-                                setShowTimelogs("none");
-                                setShowCreateInvoice("none");
-                                setShowInvoices("none");
-                                setShowOverview("none");
+                                toggleContent(3, false);
                             }}
                         >
-                            {showTimelogs30 === "block" ? (
+                            {showHideContent[3] === "block" ? (
                                 <b className="roundLinks">Last 30 days</b>
                             ) : (
                                 "Last 30 days"
@@ -140,17 +105,14 @@ function Menu() {
                         <a
                             href="#"
                             onClick={() => {
-                                setShowProjects("none");
-                                setShowTasks30("none");
-                                setShowTasks("none");
-                                setShowTimelogs30("none");
-                                setShowTimelogs("block");
-                                setShowCreateInvoice("none");
-                                setShowInvoices("none");
-                                setShowOverview("none");
+                                toggleContent(4, false);
                             }}
                         >
-                            {showTimelogs === "block" ? <b className="roundLinks">All</b> : "All"}
+                            {showHideContent[4] === "block" ? (
+                                <b className="roundLinks">All</b>
+                            ) : (
+                                "All"
+                            )}
                         </a>
                     </li>
                 </ul>
@@ -160,17 +122,10 @@ function Menu() {
                         <a
                             href="#"
                             onClick={() => {
-                                setShowProjects("none");
-                                setShowTasks30("none");
-                                setShowTasks("none");
-                                setShowTimelogs30("none");
-                                setShowTimelogs("none");
-                                setShowCreateInvoice("block");
-                                setShowInvoices("none");
-                                setShowOverview("none");
+                                toggleContent(6, false);
                             }}
                         >
-                            {showCreateInvoice === "block" ? (
+                            {showHideContent[6] === "block" ? (
                                 <b className="roundLinks">Create new</b>
                             ) : (
                                 "Create new"
@@ -181,17 +136,14 @@ function Menu() {
                         <a
                             href="#"
                             onClick={() => {
-                                setShowProjects("none");
-                                setShowTasks30("none");
-                                setShowTasks("none");
-                                setShowTimelogs30("none");
-                                setShowTimelogs("none");
-                                setShowCreateInvoice("none");
-                                setShowInvoices("block");
-                                setShowOverview("none");
+                                toggleContent(5, false);
                             }}
                         >
-                            {showInvoices === "block" ? <b className="roundLinks">All</b> : "All"}
+                            {showHideContent[5] === "block" ? (
+                                <b className="roundLinks">All</b>
+                            ) : (
+                                "All"
+                            )}
                         </a>
                     </li>
                 </ul>

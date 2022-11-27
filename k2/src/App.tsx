@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Project, Task, Timelog } from "./lib/interfaces";
 import { useProjectContext } from "./contexts/ProjContext";
 import timeSpanFormat from "time-span-format";
-import { parse } from "date-format-parse";
 const now: Date = new Date();
 const thisTime: number = now.getTime();
 const thisYear: number = now.getFullYear();
@@ -24,24 +23,13 @@ function App() {
         timelog_30,
         fetchData,
         deletePost,
-        invoice,
         emo,
         hidden,
-        showCreateInvoice,
-        showProjects,
-        showTasks,
-        showTasks30,
-        showTimelogs,
-        showTimelogs30,
-        showInvoices,
-        showOverview,
         showMenu,
         setShowMenu,
         get30B,
+        showHideContent,
     } = useProjectContext();
-    const monthsArray: string[] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
-    const [monthResults, setMonthResults] = useState<number[]>();
-    const resultArray: number[] = [];
 
     function fetchAll(): void {
         fetchData("projects");
@@ -49,7 +37,7 @@ function App() {
         fetchData("timelogs");
         fetchData("invoices");
     }
-
+    
     useEffect(() => {
         fetchAll();
     }, []);
@@ -87,16 +75,19 @@ function App() {
             <div id="box" style={{ display: `${hidden}` }}>
                 {emo}
             </div>
-            <div style={{ display: showOverview }}>
+            {showHideContent[0] === "block" &&
+            showHideContent[showHideContent.length - 1] === "block" ? (
                 <h1>Overview</h1>
-            </div>
-            <div style={{ display: showCreateInvoice }}>
+            ) : (
+                ""
+            )}
+            <div style={{ display: showHideContent[6] }}>
                 <CreateInvoice />
             </div>
-            <div style={{ display: showProjects }}>
+            <div style={{ display: showHideContent[0] }}>
                 <Projects />
             </div>
-            <div style={{ display: showTasks30 }}>
+            <div style={{ display: showHideContent[1] }}>
                 <h2>Tasks last 30 days</h2>
                 <table>
                     <thead>
@@ -134,7 +125,8 @@ function App() {
                     </tbody>
                 </table>
             </div>
-            <div style={{ display: showTasks }}>
+
+            <div id="fwefger" style={{ display: showHideContent[2] }}>
                 <h2>All tasks</h2>
                 <table>
                     <thead>
@@ -172,7 +164,8 @@ function App() {
                     </tbody>
                 </table>
             </div>
-            <div style={{ display: showTimelogs30 }}>
+
+            <div id="sf" style={{ display: showHideContent[3] }}>
                 <h2>Timelogs last 30 days</h2>
                 <table>
                     <thead>
@@ -204,7 +197,8 @@ function App() {
                     </tbody>
                 </table>
             </div>
-            <div style={{ display: showTimelogs }}>
+
+            <div style={{ display: showHideContent[4] }}>
                 <h2>All timelogs</h2>
                 <table>
                     <thead>
@@ -236,7 +230,7 @@ function App() {
                     </tbody>
                 </table>
             </div>
-            <div style={{ display: showInvoices }}>
+            <div style={{ display: showHideContent[5] }}>
                 <Invoices />
             </div>
         </div>

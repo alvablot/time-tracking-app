@@ -34,24 +34,11 @@ interface ProjectContext {
     hidden: string;
     setHidden: React.Dispatch<React.SetStateAction<string>>;
 
-    showCreateInvoice: string;
-    setShowCreateInvoice: React.Dispatch<React.SetStateAction<string>>;
-    showProjects: string;
-    setShowProjects: React.Dispatch<React.SetStateAction<string>>;
-    showTasks: string;
-    setShowTasks: React.Dispatch<React.SetStateAction<string>>;
-    showTasks30: string;
-    setShowTasks30: React.Dispatch<React.SetStateAction<string>>;
-    showTimelogs: string;
-    setShowTimelogs: React.Dispatch<React.SetStateAction<string>>;
-    showTimelogs30: string;
-    setShowTimelogs30: React.Dispatch<React.SetStateAction<string>>;
-    showInvoices: string;
-    setShowInvoices: React.Dispatch<React.SetStateAction<string>>;
-    showOverview: string;
-    setShowOverview: React.Dispatch<React.SetStateAction<string>>;
     showMenu: string;
     setShowMenu: React.Dispatch<React.SetStateAction<string>>;
+
+    showHideContent: string[];
+    setShowHideContent: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 // del 1
@@ -68,6 +55,17 @@ export const ProjectProvider = ({ children }: ProviderProps) => {
     const [inputs, setInputs] = useState<number[]>([]);
     const [emo, setEmo] = useState<string>("");
     const [hidden, setHidden] = useState<string>("none");
+    const [showHideContent, setShowHideContent] = useState<string[]>([
+        "block",
+        "block",
+        "block",
+        "block",
+        "block",
+        "block",
+        "block",
+        "block",
+        "block",
+    ]);
 
     const fetchData = async (type: string): Promise<void> => {
         try {
@@ -132,14 +130,7 @@ export const ProjectProvider = ({ children }: ProviderProps) => {
         return days;
     }
 
-    const [showCreateInvoice, setShowCreateInvoice] = useState<string>("block");
-    const [showProjects, setShowProjects] = useState<string>("block");
-    const [showTasks, setShowTasks] = useState<string>("block");
-    const [showTasks30, setShowTasks30] = useState<string>("block");
-    const [showTimelogs, setShowTimelogs] = useState<string>("block");
-    const [showTimelogs30, setShowTimelogs30] = useState<string>("block");
-    const [showInvoices, setShowInvoices] = useState<string>("block");
-    const [showOverview, setShowOverview] = useState<string>("block");
+
     const [showMenu, setShowMenu] = useState<string>("none");
     return (
         <ProjectContext.Provider
@@ -165,25 +156,12 @@ export const ProjectProvider = ({ children }: ProviderProps) => {
                 setEmo,
                 hidden,
                 setHidden,
-                showCreateInvoice,
-                setShowCreateInvoice,
-                showProjects,
-                setShowProjects,
-                showTasks,
-                setShowTasks,
-                showTasks30,
-                setShowTasks30,
-                showTimelogs,
-                setShowTimelogs,
-                showTimelogs30,
-                setShowTimelogs30,
-                showInvoices,
-                setShowInvoices,
-                showOverview,
-                setShowOverview,
+      
                 showMenu,
                 setShowMenu,
                 get30B,
+                showHideContent,
+                setShowHideContent,
             }}
         >
             {children}
