@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 function Menu() {
     const { setShowMenu, showMenu, showHideContent, setShowHideContent } = useProjectContext();
 
-    function toggleContent(index: number, all: boolean) {
+    function toggleContent(index: number, all: boolean): void {
         const newArr: string[] = [];
         showHideContent.map((element, i) => {
             if (all) {
