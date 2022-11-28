@@ -3,15 +3,17 @@ import { useState, useEffect } from "react";
 
 function Menu() {
     const { setShowMenu, showMenu, showHideContent, setShowHideContent } = useProjectContext();
-
+    let [linkTrigger, setLinkTrigger] = useState<boolean>(true);
     function toggleContent(index: number, all: boolean): void {
         const newArr: string[] = [];
         showHideContent.map((element, i) => {
             if (all) {
                 newArr[i] = "block";
+                setLinkTrigger(true);
             } else {
                 newArr[i] = "none";
                 newArr[index] = "block";
+                setLinkTrigger(false);
             }
         });
         setShowHideContent(newArr);
@@ -33,7 +35,7 @@ function Menu() {
                             toggleContent(-1, true);
                         }}
                     >
-                        {showHideContent[-1] === "block" ? (
+                        {linkTrigger ? (
                             <b className="roundLinks">Overview</b>
                         ) : (
                             "Overview"
