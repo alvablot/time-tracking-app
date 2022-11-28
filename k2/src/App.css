@@ -6,7 +6,7 @@
 }
 #box {
     font-size: 20vh;
-    position: absolute;
+    position: fixed;
     margin: 0 auto;
     padding: 5rem;
     left: 50%;
