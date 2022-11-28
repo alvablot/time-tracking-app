@@ -11,8 +11,8 @@ function Menu() {
                 newArr[i] = "block";
                 setLinkTrigger(true);
             } else {
-                newArr[i] = "none";
-                newArr[index] = "block";
+                if(index === i) newArr[index] = "block";
+                else newArr[i] = "none";
                 setLinkTrigger(false);
             }
         });
