@@ -143,12 +143,12 @@ function Invoices() {
                 <div>FEB</div>
                 <div>MAR</div>
                 <div>APR</div>
-                <div>MAJ</div>
+                <div>MAY</div>
                 <div>JUN</div>
                 <div>JUL</div>
                 <div>AUG</div>
                 <div>SEP</div>
-                <div>OKT</div>
+                <div>OCT</div>
                 <div>NOV</div>
                 <div>DEC</div>
             </div>
