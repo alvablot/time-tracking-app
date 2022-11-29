@@ -117,7 +117,7 @@ h2 {
     display: grid;
     align-items: flex-end;
     justify-content: flex-end;
-    grid-template-columns: 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px;
+    grid-template-columns: 8.4% 8.3% 8.3% 8.3% 8.3% 8.3% 8.3% 8.3% 8.3% 8.4% 8.4% 8.4%;
 }
 .dia-container > div {
     background: red;
@@ -129,10 +129,10 @@ h2 {
 .dia-container2 {
     width: 100%;
     display: grid;
-    grid-template-columns: 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px;
+    grid-template-columns: 8.4% 8.3% 8.3% 8.3% 8.3% 8.3% 8.3% 8.3% 8.3% 8.4% 8.4% 8.4%;
 }
 .dia-container2 > div {
-    
+    width: 100%;
     background: rgb(75, 74, 74);
     text-align: center;
     padding: 5px;
