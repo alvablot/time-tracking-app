@@ -8,7 +8,7 @@ const thisYear: number = now.getFullYear();
 function Invoices() {
     const [monthlyAmount, setMonthlyAmount] = useState<number[]>([]);
     const monthAmountArr: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    const { invoice, fetchData, deletePost, get30B } = useProjectContext();
+    const { invoice, fetchData, deletePost, get30B, emo } = useProjectContext();
     const now: Date = new Date();
     const year: string = now.getFullYear().toString();
     let filteredYear: number[];
@@ -38,10 +38,7 @@ function Invoices() {
             if (month === 4) monthAmountArr[3] += amount;
             if (month === 5) monthAmountArr[4] += amount;
             if (month === 6) monthAmountArr[5] += amount;
-            if (month === 7) {
-                // console.log(month);
-                monthAmountArr[6] += amount;
-            }
+            if (month === 7) monthAmountArr[6] += amount;
             if (month === 8) monthAmountArr[7] += amount;
             if (month === 9) monthAmountArr[8] += amount;
             if (month === 10) monthAmountArr[9] += amount;
@@ -56,7 +53,7 @@ function Invoices() {
         invoice.map((element, i) => {
             calculateMonth(element.created_date, element.amount);
         });
-    }, [invoice]);
+    }, [invoice, emo]);
 
     // useEffect(() => {
     //     console.log(monthlyAmount);
@@ -120,11 +117,7 @@ function Invoices() {
 
             <div className="dia-container">
                 {monthlyAmount.map((month, i) => {
-                    return (
-                        <div key={i} style={{ height: month / 20 + 50 }}>
-                            <span className="twisted-text"> </span>
-                        </div>
-                    );
+                    return <div key={i} style={{ height: month / 10 }}></div>;
                 })}
             </div>
             <div className="dia-container2">
