@@ -2,7 +2,7 @@
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
-    
+    margin-bottom: 20px;
 }
 #box {
     font-size: 20vh;
@@ -111,19 +111,41 @@ h2 {
     text-align: left;
     margin-top: 6px;
 }
-/* .dia-container {
-    border: 1px solid green;
-    justify-content: center;
+.dia-container {
+    background: green;
+    width: 100%;
+    display: grid;
+    align-items: flex-end;
+    justify-content: flex-end;
+    grid-template-columns: 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px;
+}
+.dia-container > div {
+    background: red;
+    justify-content: flex-end;
+    padding: 2px;
+    row-gap: 5px;
+    min-height: 50px;
+    border: 1px solid rgb(74, 0, 0)
+}
+.dia-container2 {
     width: 100%;
     display: grid;
     grid-template-columns: 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px;
-} */
-/* .dia-container  > div {
-    border: 1px solid rgba(0, 0, 0, 0.8);
+}
+.dia-container2 > div {
+    
+    background: rgb(75, 74, 74);
     text-align: center;
     padding: 2px;
-} */
-
+    row-gap: 5px;
+    font-size: 10px;
+}
+.twisted-text {
+    display: block;
+    transform: rotate(90deg);
+    text-align: right;
+    
+}
 .x {
     background: black;
     cursor: grab;
