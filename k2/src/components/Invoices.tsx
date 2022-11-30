@@ -38,7 +38,10 @@ function Invoices() {
             if (month === 4) monthAmountArr[3] += amount;
             if (month === 5) monthAmountArr[4] += amount;
             if (month === 6) monthAmountArr[5] += amount;
-            if (month === 7) monthAmountArr[6] += amount;
+            if (month === 7) {
+                // console.log(month);
+                monthAmountArr[6] += amount;
+            }
             if (month === 8) monthAmountArr[7] += amount;
             if (month === 9) monthAmountArr[8] += amount;
             if (month === 10) monthAmountArr[9] += amount;
@@ -117,7 +120,11 @@ function Invoices() {
 
             <div className="dia-container">
                 {monthlyAmount.map((month, i) => {
-                    return <div key={i} style={{ height: month / 10 }}></div>;
+                    return (
+                        <div key={i} style={{ height: month / 10 + 50 }}>
+                            <span className="twisted-text"> </span>
+                        </div>
+                    );
                 })}
             </div>
             <div className="dia-container2">
